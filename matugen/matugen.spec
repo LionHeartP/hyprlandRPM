@@ -1,7 +1,7 @@
 %bcond_with check
 
 Name:           matugen
-Version:        2.4.1
+Version:        3.0.0
 Release:        %autorelease
 Summary:        A material you color generation tool with templates
 License:        GPL-2.0-only

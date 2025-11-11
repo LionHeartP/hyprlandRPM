@@ -1,0 +1,295 @@
+From aded918b8156610ccfb25b2496d1c7c2a9b9dc10 Mon Sep 17 00:00:00 2001
+From: LionHeartP <LionHeartP@proton.me>
+Date: Wed, 15 Oct 2025 19:00:05 +0300
+Subject: [PATCH] revert: SystemMonitor: remove GPU temp
+
+---
+ Modules/Bar/Widgets/SystemMonitor.qml         |  45 ++++++
+ .../WidgetSettings/SystemMonitorSettings.qml  |  11 ++
+ Services/UI/BarWidgetRegistry.qml                |   1 +
+ Services/System/SystemStatService.qml                | 130 ++++++++++++++++++
+ 4 files changed, 187 insertions(+)
+
+diff --git a/Modules/Bar/Widgets/SystemMonitor.qml b/Modules/Bar/Widgets/SystemMonitor.qml
+index 7609f3bf..94be6f5a 100644
+--- a/Modules/Bar/Widgets/SystemMonitor.qml
++++ b/Modules/Bar/Widgets/SystemMonitor.qml
+@@ -37,6 +37,8 @@ Rectangle {
+   readonly property bool showMemoryAsPercent: (widgetSettings.showMemoryAsPercent !== undefined) ? widgetSettings.showMemoryAsPercent : widgetMetadata.showMemoryAsPercent
+   readonly property bool showNetworkStats: (widgetSettings.showNetworkStats !== undefined) ? widgetSettings.showNetworkStats : widgetMetadata.showNetworkStats
+   readonly property bool showDiskUsage: (widgetSettings.showDiskUsage !== undefined) ? widgetSettings.showDiskUsage : widgetMetadata.showDiskUsage
++  readonly property bool showGpuTemp: (widgetSettings.showGpuTemp !== undefined) ? widgetSettings.showGpuTemp : (widgetMetadata.showGpuTemp
++                                                                                                                 || false)
+ 
+   readonly property real iconSize: textSize * 1.4
+   readonly property real textSize: {
+@@ -172,6 +174,49 @@ Rectangle {
+         }
+       }
+     }
++    
++    // GPU Temperature Component
++      Item {
++        Layout.preferredWidth: isVertical ? root.width : (iconSize + tempTextWidth) + (Style.marginXXS)
++      Layout.preferredHeight: Style.capsuleHeight
++      Layout.alignment: isVertical ? Qt.AlignHCenter : Qt.AlignVCenter
++      visible: showGpuTemp
++      
++      GridLayout {
++        id: gpuTempContent
++        anchors.centerIn: parent
++        flow: isVertical ? GridLayout.TopToBottom : GridLayout.LeftToRight
++        rows: isVertical ? 2 : 1
++        columns: isVertical ? 1 : 2
++        rowSpacing: Style.marginXXS
++        columnSpacing: Style.marginXXS
++        
++      NIcon {
++          icon: "gpu-temperature"
++          pointSize: iconSize
++          applyUiScale: false
++          Layout.alignment: Qt.AlignCenter
++          Layout.row: isVertical ? 1 : 0
++          Layout.column: 0
++        }
++      
++      NText {
++          text: `${Math.round(SystemStatService.gpuTemp)}°`
++          family: Settings.data.ui.fontFixed
++          pointSize: textSize
++          applyUiScale: false
++          font.weight: Style.fontWeightMedium
++          Layout.alignment: Qt.AlignCenter
++          Layout.preferredWidth: isVertical ? -1 : tempTextWidth
++          horizontalAlignment: isVertical ? Text.AlignHCenter : Text.AlignRight
++          verticalAlignment: Text.AlignVCenter
++          color: Color.mPrimary
++          Layout.row: isVertical ? 0 : 0
++          Layout.column: isVertical ? 0 : 1
++          scale: isVertical ? Math.min(1.0, root.width / implicitWidth) : 1.0
++        }
++      }
++    }
+ 
+     // Memory Usage Component
+     Item {
+diff --git a/Modules/Panels/Settings/Bar/WidgetSettings/SystemMonitorSettings.qml b/Modules/Panels/Settings/Bar/WidgetSettings/SystemMonitorSettings.qml
+index 8133ab18..ec3ef904 100644
+--- a/Modules/Panels/Settings/Bar/WidgetSettings/SystemMonitorSettings.qml
++++ b/Modules/Panels/Settings/Bar/WidgetSettings/SystemMonitorSettings.qml
+@@ -16,6 +16,8 @@ ColumnLayout {
+   // Local, editable state for checkboxes
+   property bool valueShowCpuUsage: widgetData.showCpuUsage !== undefined ? widgetData.showCpuUsage : widgetMetadata.showCpuUsage
+   property bool valueShowCpuTemp: widgetData.showCpuTemp !== undefined ? widgetData.showCpuTemp : widgetMetadata.showCpuTemp
++  property bool valueShowGpuTemp: widgetData.showGpuTemp !== undefined ? widgetData.showGpuTemp : (widgetMetadata.showGpuTemp
++                                                                                                   || false)
+   property bool valueShowMemoryUsage: widgetData.showMemoryUsage !== undefined ? widgetData.showMemoryUsage : widgetMetadata.showMemoryUsage
+   property bool valueShowMemoryAsPercent: widgetData.showMemoryAsPercent !== undefined ? widgetData.showMemoryAsPercent : widgetMetadata.showMemoryAsPercent
+   property bool valueShowNetworkStats: widgetData.showNetworkStats !== undefined ? widgetData.showNetworkStats : widgetMetadata.showNetworkStats
+@@ -25,6 +27,7 @@ ColumnLayout {
+     var settings = Object.assign({}, widgetData || {})
+     settings.showCpuUsage = valueShowCpuUsage
+     settings.showCpuTemp = valueShowCpuTemp
++    settings.showGpuTemp = valueShowGpuTemp
+     settings.showMemoryUsage = valueShowMemoryUsage
+     settings.showMemoryAsPercent = valueShowMemoryAsPercent
+     settings.showNetworkStats = valueShowNetworkStats
+@@ -49,6 +52,14 @@ ColumnLayout {
+     checked: valueShowCpuTemp
+     onToggled: checked => valueShowCpuTemp = checked
+   }
++  
++  NToggle {
++    id: showGpuTemp
++    Layout.fillWidth: true
++    label: "GPU temperature"
++    checked: valueShowGpuTemp
++    onToggled: checked => valueShowGpuTemp = checked
++  }
+ 
+   NToggle {
+     id: showMemoryUsage
+diff --git a/Services/UI/BarWidgetRegistry.qml b/Services/UI/BarWidgetRegistry.qml
+index 15263558..28b40a69 100644
+--- a/Services/UI/BarWidgetRegistry.qml
++++ b/Services/UI/BarWidgetRegistry.qml
+@@ -109,6 +109,7 @@ Singleton {
+                                     "allowUserSettings": true,
+                                     "showCpuUsage": true,
+                                     "showCpuTemp": true,
++                                    "showGpuTemp": false,
+                                     "showMemoryUsage": true,
+                                     "showMemoryAsPercent": false,
+                                     "showNetworkStats": false,
+diff --git a/Services/System/SystemStatService.qml b/Services/System/SystemStatService.qml
+index 9692c1ee..8905dab5 100644
+--- a/Services/System/SystemStatService.qml
++++ b/Services/System/SystemStatService.qml
+@@ -12,6 +12,7 @@ Singleton {
+   // Public values
+   property real cpuUsage: 0
+   property real cpuTemp: 0
++  property real gpuTemp: 0
+   property real memGb: 0
+   property real memPercent: 0
+   property real diskPercent: 0
+@@ -35,6 +36,12 @@ Singleton {
+   readonly property var supportedTempCpuSensorNames: ["coretemp", "k10temp", "zenpower"]
+   property string cpuTempSensorName: ""
+   property string cpuTempHwmonPath: ""
++  // Gpu temperature (simple hwmon read if available)
++  readonly property var supportedTempGpuSensorNames: ["amdgpu", "nvidia", "radeon"]
++  property string gpuTempSensorName: ""
++  property string gpuTempHwmonPath: ""
++  property bool gpuIsDedicated: false
++  property string _gpuPendingAmdPath: ""
+   // For Intel coretemp averaging of all cores/sensors
+   property var intelTempValues: []
+   property int intelTempFilesChecked: 0
+@@ -66,6 +73,7 @@ Singleton {
+       dfProcess.running = true
+ 
+       updateCpuTemperature()
++      updateGpuTemperature()
+     }
+   }
+ 
+@@ -183,6 +191,108 @@ Singleton {
+                    })
+     }
+   }
++  
++  // --------------------------------------------
++  // --------------------------------------------
++  // ---- GPU temperature detection (hwmon)
++  FileView {
++    id: gpuTempNameReader
++    property int currentIndex: 0
++    printErrors: false
++
++    function checkNext() {
++      if (currentIndex >= 16) {
++        // Check up to hwmon10
++        Logger.warn("SystemStat", "No supported GPU temperature sensor found")
++        return
++      }
++
++      gpuTempNameReader.path = `/sys/class/hwmon/hwmon${currentIndex}/name`
++      gpuTempNameReader.reload()
++    }
++
++    Component.onCompleted: checkNext()
++
++    onLoaded: {
++      const name = text().trim()
++      if (root.supportedTempGpuSensorNames.includes(name)) {
++        const hwPath = `/sys/class/hwmon/hwmon${currentIndex}`
++        if (name === "nvidia") {
++          // Treat NVIDIA as dedicated by default
++          root.gpuTempSensorName = name
++          root.gpuTempHwmonPath = hwPath
++          root.gpuIsDedicated = true
++          Logger.log("SystemStat", `Selected NVIDIA GPU thermal sensor at ${root.gpuTempHwmonPath}`)
++        } else if (name === "amdgpu") {
++          // Probe VRAM to distinguish dGPU vs iGPU
++          root._gpuPendingAmdPath = hwPath
++          vramReader.requestCheck(hwPath)
++        } else if (!root.gpuTempHwmonPath) {
++          // Fallback to first supported sensor (e.g., radeon)
++          root.gpuTempSensorName = name
++          root.gpuTempHwmonPath = hwPath
++          Logger.log("SystemStat", `Selected GPU thermal sensor at ${root.gpuTempHwmonPath}`)
++        }
++      } else {
++        currentIndex++
++        Qt.callLater(() => {
++                       checkNext()
++                     })
++      }
++    }
++
++    onLoadFailed: function (error) {
++      currentIndex++
++      Qt.callLater(() => {
++                     checkNext()
++                   })
++    }
++  }
++
++  // Reader to detect AMD dGPU by checking VRAM presence
++  FileView {
++    id: vramReader
++    property string targetHwmonPath: ""
++    function requestCheck(hwPath) {
++      targetHwmonPath = hwPath
++      vramReader.path = `${hwPath}/device/mem_info_vram_total`
++      vramReader.reload()
++    }
++    printErrors: false
++    onLoaded: {
++      const val = parseInt(text().trim())
++      // If VRAM present (>0), prefer this as dGPU
++      if (!isNaN(val) && val > 0) {
++        root.gpuTempSensorName = "amdgpu"
++        root.gpuTempHwmonPath = targetHwmonPath
++        root.gpuIsDedicated = true
++        Logger.log("SystemStat",
++                   `Selected AMD dGPU (VRAM=${Math.round(val / (1024 * 1024 * 1024))}GB) at ${root.gpuTempHwmonPath}`)
++      } else if (!root.gpuTempHwmonPath) {
++        // Use as fallback iGPU if nothing selected yet
++        root.gpuTempSensorName = "amdgpu"
++        root.gpuTempHwmonPath = targetHwmonPath
++        root.gpuIsDedicated = false
++        Logger.log("SystemStat", `Selected AMD GPU (no VRAM) at ${root.gpuTempHwmonPath}`)
++      }
++      // Continue scanning other hwmon entries
++      gpuTempNameReader.currentIndex++
++      Qt.callLater(() => {
++                     gpuTempNameReader.checkNext()
++                   })
++    }
++    onLoadFailed: function (error) {
++      // If failed to read VRAM, consider as fallback if none selected
++      if (!root.gpuTempHwmonPath) {
++        root.gpuTempSensorName = "amdgpu"
++        root.gpuTempHwmonPath = targetHwmonPath
++      }
++      gpuTempNameReader.currentIndex++
++      Qt.callLater(() => {
++                     gpuTempNameReader.checkNext()
++                   })
++    }
++  }
+ 
+   // -------------------------------------------------------
+   // -------------------------------------------------------
+@@ -374,6 +484,26 @@ Singleton {
+       checkNextIntelTemp()
+     }
+   }
++  
++  // -------------------------------------------------------
++  // Function to start/refresh the GPU temperature
++  function updateGpuTemperature() {
++    if (!root.gpuTempHwmonPath)
++      return
++    gpuTempReader.path = `${root.gpuTempHwmonPath}/temp2_input`
++    gpuTempReader.reload()
++  }
++
++  FileView {
++    id: gpuTempReader
++    printErrors: false
++    onLoaded: {
++      const data = parseInt(text().trim())
++      if (!isNaN(data)) {
++        root.gpuTemp = Math.round(data / 1000.0)
++      }
++    }
++  }
+ 
+   // -------------------------------------------------------
+   // Function to check next Intel temperature sensor
+-- 
+2.51.0
+

@@ -1,0 +1,25 @@
+From 9b5945e12b4d7d2fb49680e2546c1e53f49cc66d Mon Sep 17 00:00:00 2001
+From: LionHeartP <LionHeartP@proton.me>
+Date: Sun, 9 Nov 2025 14:55:41 +0200
+Subject: [PATCH] Hyprland: use uwsm logout function
+
+---
+ Services/Compositor/HyprlandService.qml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Services/Compositor/HyprlandService.qml b/Services/Compositor/HyprlandService.qml
+index b62d642c..fe6b767c 100644
+--- a/Services/Compositor/HyprlandService.qml
++++ b/Services/Compositor/HyprlandService.qml
+@@ -391,7 +391,7 @@ Item {
+ 
+   function logout() {
+     try {
+-      Quickshell.execDetached(["hyprctl", "dispatch", "exit"])
++      Quickshell.execDetached(["loginctl", "terminate-user", ""])
+     } catch (e) {
+       Logger.e("HyprlandService", "Failed to logout:", e)
+     }
+-- 
+2.51.0
+
