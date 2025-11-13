@@ -1,6 +1,6 @@
-%global commit0 be3cbf60b4b6a90c6e0d947e1e8cf791062b81fb
+%global commit0 befb2670803cf7c1b9f0323449c8d9ccdaa485e2
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global bumpver 1346
+%global bumpver 1347
 
 %global __provides_exclude_from ^(%{_libdir}/hyprland/.*\\.so)$
 
@@ -17,7 +17,7 @@
 }
 
 %if !%{defined build_for}
-%global build_for release
+%global build_for git
 %endif
 
 %define pluginsmeta %{lua:

@@ -1,7 +1,7 @@
 %global _default_patch_fuzz 2
 
 Name:   	noctalia-shell
-Version:	3.0.10
+Version:	3.0.11
 Release:	%autorelease
 Summary:	A sleek and minimal desktop shell thoughtfully crafted for Wayland, built with Quickshell.
 
