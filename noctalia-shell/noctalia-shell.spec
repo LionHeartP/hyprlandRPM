@@ -1,7 +1,7 @@
 %global _default_patch_fuzz 2
 
 Name:   	noctalia-shell
-Version:	3.0.11
+Version:	3.1.1
 Release:	%autorelease
 Summary:	A sleek and minimal desktop shell thoughtfully crafted for Wayland, built with Quickshell.
 
@@ -46,6 +46,9 @@ cp -r ./* %{buildroot}/etc/xdg/quickshell/noctalia-shell/
 %{_sysconfdir}/xdg/quickshell/noctalia-shell/
 
 %changelog
+* Sun Nov 16 2025 LionHeartP <LionHeartP@proton.me> - 3.1.1-1
+- Update to 3.1.1
+
 * Wed Nov 12 2025 LionHeartP <LionHeartP@proton.me> - 3.0.10-1
 - Update to 3.0.10
 
