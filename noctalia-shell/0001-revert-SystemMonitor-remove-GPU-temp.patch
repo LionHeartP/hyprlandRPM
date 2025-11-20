@@ -14,15 +14,14 @@ diff --git a/Modules/Bar/Widgets/SystemMonitor.qml b/Modules/Bar/Widgets/SystemM
 index 7609f3bf..94be6f5a 100644
 --- a/Modules/Bar/Widgets/SystemMonitor.qml
 +++ b/Modules/Bar/Widgets/SystemMonitor.qml
-@@ -37,6 +37,8 @@ Rectangle {
+@@ -42,6 +42,7 @@ Rectangle {
    readonly property bool showMemoryAsPercent: (widgetSettings.showMemoryAsPercent !== undefined) ? widgetSettings.showMemoryAsPercent : widgetMetadata.showMemoryAsPercent
    readonly property bool showNetworkStats: (widgetSettings.showNetworkStats !== undefined) ? widgetSettings.showNetworkStats : widgetMetadata.showNetworkStats
    readonly property bool showDiskUsage: (widgetSettings.showDiskUsage !== undefined) ? widgetSettings.showDiskUsage : widgetMetadata.showDiskUsage
-+  readonly property bool showGpuTemp: (widgetSettings.showGpuTemp !== undefined) ? widgetSettings.showGpuTemp : (widgetMetadata.showGpuTemp
-+                                                                                                                 || false)
++  readonly property bool showGpuTemp: (widgetSettings.showGpuTemp !== undefined) ? widgetSettings.showGpuTemp : (widgetMetadata.showGpuTemp || false)
+   readonly property string diskPath: (widgetSettings.diskPath !== undefined) ? widgetSettings.diskPath : widgetMetadata.diskPath
  
    readonly property real iconSize: textSize * 1.4
-   readonly property real textSize: {
 @@ -172,6 +174,49 @@ Rectangle {
          }
        }
@@ -86,14 +85,14 @@ index 8133ab18..ec3ef904 100644
    property bool valueShowMemoryUsage: widgetData.showMemoryUsage !== undefined ? widgetData.showMemoryUsage : widgetMetadata.showMemoryUsage
    property bool valueShowMemoryAsPercent: widgetData.showMemoryAsPercent !== undefined ? widgetData.showMemoryAsPercent : widgetMetadata.showMemoryAsPercent
    property bool valueShowNetworkStats: widgetData.showNetworkStats !== undefined ? widgetData.showNetworkStats : widgetMetadata.showNetworkStats
-@@ -25,6 +27,7 @@ ColumnLayout {
-     var settings = Object.assign({}, widgetData || {})
-     settings.showCpuUsage = valueShowCpuUsage
-     settings.showCpuTemp = valueShowCpuTemp
+@@ -30,6 +30,7 @@ ColumnLayout {
+     settings.usePrimaryColor = valueUsePrimaryColor;
+     settings.showCpuUsage = valueShowCpuUsage;
+     settings.showCpuTemp = valueShowCpuTemp;
 +    settings.showGpuTemp = valueShowGpuTemp
-     settings.showMemoryUsage = valueShowMemoryUsage
-     settings.showMemoryAsPercent = valueShowMemoryAsPercent
-     settings.showNetworkStats = valueShowNetworkStats
+     settings.showMemoryUsage = valueShowMemoryUsage;
+     settings.showMemoryAsPercent = valueShowMemoryAsPercent;
+     settings.showNetworkStats = valueShowNetworkStats;
 @@ -49,6 +52,14 @@ ColumnLayout {
      checked: valueShowCpuTemp
      onToggled: checked => valueShowCpuTemp = checked
@@ -146,10 +145,10 @@ index 9692c1ee..8905dab5 100644
    // For Intel coretemp averaging of all cores/sensors
    property var intelTempValues: []
    property int intelTempFilesChecked: 0
-@@ -66,6 +73,7 @@ Singleton {
-       dfProcess.running = true
+@@ -73,6 +73,7 @@ Singleton {
+       dfProcess.running = true;
  
-       updateCpuTemperature()
+       updateCpuTemperature();
 +      updateGpuTemperature()
      }
    }

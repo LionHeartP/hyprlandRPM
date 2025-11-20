@@ -11,14 +11,14 @@ diff --git a/Services/Compositor/HyprlandService.qml b/Services/Compositor/Hyprl
 index b62d642c..fe6b767c 100644
 --- a/Services/Compositor/HyprlandService.qml
 +++ b/Services/Compositor/HyprlandService.qml
-@@ -391,7 +391,7 @@ Item {
+@@ -452,7 +452,7 @@ Item {
  
    function logout() {
      try {
--      Quickshell.execDetached(["hyprctl", "dispatch", "exit"])
-+      Quickshell.execDetached(["loginctl", "terminate-user", ""])
+-      Quickshell.execDetached(["hyprctl", "dispatch", "exit"]);
++      Quickshell.execDetached(["loginctl", "terminate-user", ""]);
      } catch (e) {
-       Logger.e("HyprlandService", "Failed to logout:", e)
+       Logger.e("HyprlandService", "Failed to logout:", e);
      }
 -- 
 2.51.0
