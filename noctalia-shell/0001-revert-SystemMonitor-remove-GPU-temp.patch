@@ -89,7 +89,7 @@ index 8133ab18..ec3ef904 100644
      settings.usePrimaryColor = valueUsePrimaryColor;
      settings.showCpuUsage = valueShowCpuUsage;
      settings.showCpuTemp = valueShowCpuTemp;
-+    settings.showGpuTemp = valueShowGpuTemp
++    settings.showGpuTemp = valueShowGpuTemp;
      settings.showMemoryUsage = valueShowMemoryUsage;
      settings.showMemoryAsPercent = valueShowMemoryAsPercent;
      settings.showNetworkStats = valueShowNetworkStats;
@@ -149,7 +149,7 @@ index 9692c1ee..8905dab5 100644
        dfProcess.running = true;
  
        updateCpuTemperature();
-+      updateGpuTemperature()
++      updateGpuTemperature();
      }
    }
  
