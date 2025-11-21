@@ -1,5 +1,5 @@
 Name:           hyprgraphics
-Version:        0.3.0
+Version:        0.4.0
 Release:        %autorelease
 Summary:        Hyprland graphics / resource utilities
 
@@ -56,7 +56,7 @@ Development files for %{name}.
 %files
 %license LICENSE
 %doc README.md
-%{_libdir}/lib%{name}.so.2
+%{_libdir}/lib%{name}.so.3
 %{_libdir}/lib%{name}.so.%{version}
 
 %files devel
