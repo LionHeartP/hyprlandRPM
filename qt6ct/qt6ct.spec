@@ -6,7 +6,7 @@
 
 Name:    qt6ct
 Version: 0.11
-Release: %autorelease
+Release: %autorelease -b5
 Summary: Qt6 - Configuration Tool
 
 License: BSD-2-Clause
