@@ -23,7 +23,7 @@ Summary:        Efficient animated wallpaper daemon for wayland, controlled at r
 # Zlib OR Apache-2.0 OR MIT
 License:        GPL-3.0-only AND (0BSD OR MIT OR Apache-2.0) AND Apache-2.0 AND (Apache-2.0 OR MIT) AND (Apache-2.0 WITH LLVM-exception) AND (Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT) AND BSD-2-Clause AND BSD-3-Clause AND MIT AND (MIT OR Apache-2.0) AND (MIT OR Apache-2.0 OR NCSA) AND (CC0-1.0 OR Apache-2.0) AND (MIT OR Apache-2.0 OR Zlib) AND (Unlicense OR MIT) AND Zlib
 
-URL:            https://codeberg.org/LGFae/awww/
+URL:            https://codeberg.org/LGFae/%{name}/
 Source:         %{url}/archive/v%{version}.tar.gz
 
 BuildRequires:  cargo-rpm-macros >= 24
@@ -41,7 +41,7 @@ Obsoletes: 	swww <= 0.11.2
 %description %{_description}
 
 %prep
-%autosetup -p1 -n %{name}
+%autosetup -n %{name}
 cargo vendor
 %cargo_prep -v vendor
 
@@ -55,9 +55,9 @@ cargo vendor
 %install
 install -Dpm755 target/release/swww %{buildroot}%{_bindir}/swww
 install -Dpm755 target/release/swww-daemon %{buildroot}%{_bindir}/swww-daemon
-install -Dpm644 completions/_swww %{buildroot}%{zsh_completions_dir}/_%{name}
-install -Dpm644 completions/swww.bash %{buildroot}%{bash_completions_dir}/%{name}
-install -Dpm644 completions/swww.fish %{buildroot}%{fish_completions_dir}/%{name}.fish
+install -Dpm644 completions/_swww %{buildroot}%{zsh_completions_dir}/_swww
+install -Dpm644 completions/swww.bash %{buildroot}%{bash_completions_dir}/swww
+install -Dpm644 completions/swww.fish %{buildroot}%{fish_completions_dir}/swww.fish
 install -Dpm644 ./doc/generated/*.1 -t %{buildroot}%{_mandir}/man1
 
 %if %{with check}
@@ -74,9 +74,9 @@ install -Dpm644 ./doc/generated/*.1 -t %{buildroot}%{_mandir}/man1
 %{_bindir}/swww
 %{_bindir}/swww-daemon
 %{_mandir}/man1/swww*.1.*
-%{bash_completions_dir}/%{name}
-%{fish_completions_dir}/%{name}.fish
-%{zsh_completions_dir}/_%{name}
+%{bash_completions_dir}/swww
+%{fish_completions_dir}/swww.fish
+%{zsh_completions_dir}/_swww
 
 %changelog
 %autochangelog
