@@ -41,6 +41,7 @@ A collection of Hyprland and related packages:
 * **[hyprqt6engine](https://github.com/hyprwm/hyprqt6engine)** [(spec)](https://github.com/solopasha/hyprlandRPM/blob/master/hyprqt6engine/hyprqt6engine.spec) - Qt6 Theme Provider for Hyprland.
 
 ## If you find this repository helpful, please consider supporting it with a donation
+## WARNING: I AM NOT THE OWNER OF THESE ACCOUNTS. These belong to [solopasha](https://github.com/solopasha/), the original creator of this repo!
 
 TJWXhcsoGQbbJTe9uxHd5QjdDu9yU7b2S3 (USDT TRC20)
 
