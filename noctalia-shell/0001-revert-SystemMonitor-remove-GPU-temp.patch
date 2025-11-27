@@ -22,7 +22,7 @@ index 7609f3bf..94be6f5a 100644
    readonly property string diskPath: (widgetSettings.diskPath !== undefined) ? widgetSettings.diskPath : widgetMetadata.diskPath
  
    readonly property real iconSize: textSize * 1.4
-@@ -172,6 +174,49 @@ Rectangle {
+@@ -347,6 +347,73 @@ Rectangle {
          }
        }
      }
@@ -33,6 +33,20 @@ index 7609f3bf..94be6f5a 100644
 +      Layout.preferredHeight: Style.capsuleHeight
 +      Layout.alignment: isVertical ? Qt.AlignHCenter : Qt.AlignVCenter
 +      visible: showGpuTemp
++
++      // Status indicator covering the entire component
++      Loader {
++        sourceComponent: statusIndicatorComponent
++        anchors.centerIn: parent
++
++        onLoaded: {
++          item.warning = Qt.binding(() => tempWarning);
++          item.critical = Qt.binding(() => tempCritical);
++          item.indicatorWidth = Qt.binding(() => gpuTempContainer.width);
++          item.warningColor = Qt.binding(() => root.warningColor);
++          item.criticalColor = Qt.binding(() => root.criticalColor);
++        }
++      }
 +      
 +      GridLayout {
 +        id: gpuTempContent
@@ -42,14 +56,23 @@ index 7609f3bf..94be6f5a 100644
 +        columns: isVertical ? 1 : 2
 +        rowSpacing: Style.marginXXS
 +        columnSpacing: Style.marginXXS
-+        
-+      NIcon {
-+          icon: "gpu-temperature"
-+          pointSize: iconSize
-+          applyUiScale: false
++
++        Item {
 +          Layout.alignment: Qt.AlignCenter
 +          Layout.row: isVertical ? 1 : 0
 +          Layout.column: 0
++          Layout.fillWidth: isVertical
++          implicitWidth: iconSize
++          implicitHeight: iconSize
++        
++          NIcon {
++            icon: "gpu-temperature"
++            pointSize: iconSize
++            applyUiScale: false
++            anchors.centerIn: parent
++            // Invert color when temp indicator active
++            color: isVertical ? (tempCritical ? criticalColor : (tempWarning ? warningColor : Color.mOnSurface)) : ((tempWarning || tempCritical) ? Color.mSurfaceVariant : Color.mOnSurface)
++          }
 +        }
 +      
 +      NText {
@@ -62,7 +85,8 @@ index 7609f3bf..94be6f5a 100644
 +          Layout.preferredWidth: isVertical ? -1 : tempTextWidth
 +          horizontalAlignment: isVertical ? Text.AlignHCenter : Text.AlignRight
 +          verticalAlignment: Text.AlignVCenter
-+          color: Color.mPrimary
++          // Use highlight colors in vertical bar; otherwise invert text color to bar background when temp indicator active
++          color: isVertical ? (tempCritical ? criticalColor : (tempWarning ? warningColor : textColor)) : ((tempWarning || tempCritical) ? Color.mSurfaceVariant : textColor)
 +          Layout.row: isVertical ? 0 : 0
 +          Layout.column: isVertical ? 0 : 1
 +          scale: isVertical ? Math.min(1.0, root.width / implicitWidth) : 1.0
@@ -145,14 +169,28 @@ index 9692c1ee..8905dab5 100644
    // For Intel coretemp averaging of all cores/sensors
    property var intelTempValues: []
    property int intelTempFilesChecked: 0
-@@ -73,6 +73,7 @@ Singleton {
-       dfProcess.running = true;
- 
-       updateCpuTemperature();
-+      updateGpuTemperature();
-     }
+@@ -84,6 +84,21 @@ Singleton {
+     onTriggered: updateCpuTemperature()
    }
  
++  // Timer for GPU temperature
++  Timer {
++    id: gpuTempTimer
++    interval: root.normalizeInterval(Settings.data.systemMonitor.tempPollingInterval)
++    repeat: true
++    running: true
++    triggeredOnStart: true
++    onIntervalChanged: {
++      if (running) {
++        restart();
++      }
++    }
++    onTriggered: updateGpuTemperature()
++  }
++  
+   // Timer for memory stats
+   Timer {
+     id: memoryTimer
 @@ -183,6 +191,108 @@ Singleton {
                     })
      }
