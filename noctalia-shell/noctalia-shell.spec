@@ -1,8 +1,8 @@
 %global _default_patch_fuzz 2
 
 Name:   	noctalia-shell
-Version:	3.4.0
-Release:	%autorelease -b2
+Version:	3.5.0
+Release:	%autorelease
 Summary:	A sleek and minimal desktop shell thoughtfully crafted for Wayland, built with Quickshell.
 
 License:	MIT
@@ -16,10 +16,9 @@ BuildArch:	noarch
 
 Requires:	brightnessctl
 Requires:	dejavu-sans-fonts
-Requires:	google-roboto-fonts
 Requires:	gpu-screen-recorder
+Requires:	qt6-qtmultimedia
 Requires:	quickshell
-Requires:	rsms-inter-fonts
 
 Recommends:	cava
 Recommends:	cliphist
@@ -46,6 +45,10 @@ cp -r ./* %{buildroot}/etc/xdg/quickshell/noctalia-shell/
 %{_sysconfdir}/xdg/quickshell/noctalia-shell/
 
 %changelog
+* Tue Dec 02 2025 LionHeartP <LionHeartP@proton.me> - 3.5.0-1
+- Update to 3.5.0
+- Remove inter and robot font as deps and add qt6-qtmultimedia
+
 * Thu Nov 27 2025 LionHeartP <LionHeartP@proton.me> - 3.4.0-1
 - Update to 3.4.0
 
