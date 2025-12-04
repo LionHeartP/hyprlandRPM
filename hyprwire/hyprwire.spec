@@ -1,5 +1,5 @@
 Name:           hyprwire
-Version:        0.2.0
+Version:        0.2.1
 Release:        %autorelease
 Summary:        A fast and consistent wire protocol for IPC
 
