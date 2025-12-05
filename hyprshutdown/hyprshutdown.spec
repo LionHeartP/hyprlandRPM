@@ -1,4 +1,4 @@
-%global commit a7b809e3a222b8ab09f23b77c93c8dc51da8f302
+%global commit 4f3278e180e69160e0456f673635741a9cea6548
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 
 Name:    hyprshutdown
@@ -45,5 +45,5 @@ hyprshutdown is a graceful shutdown/logout utility for Hyprland, which prevents 
 %{_bindir}/hyprshutdown
 
 %changelog
-* Fri Dec 05 2025 LionHeartP <LionHeartP@proton.me> - 0-1.gita7b809e
+* Fri Dec 05 2025 LionHeartP <LionHeartP@proton.me> - 0-1.git4f3278e
 - Initial package
