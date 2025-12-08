@@ -43,7 +43,7 @@ URL:            https://github.com/hyprwm/hyprland-plugins
 Source:         %{url}/archive/%{commit0}/%{name}-%{commit0}.tar.gz
 
 BuildRequires:  gcc-c++
-BuildRequires:  meson
+BuildRequires:  cmake
 BuildRequires:  %{hyprlandpkg}-devel
 
 Requires:       %{hyprlandpkg} = %_hyprland_version
@@ -76,8 +76,8 @@ Requires:      %{hyprlandpkg} = %_hyprland_version\
 for plugin in %{plugins}
 do
 pushd $plugin
-%meson --libdir=%{_libdir}/hyprland
-%meson_build
+%cmake -DCMAKE_INSTALL_LIBDIR=%{_libdir}/hyprland
+%cmake_build
 popd
 done
 
@@ -86,7 +86,7 @@ done
 for plugin in %{plugins}
 do
 pushd $plugin
-%meson_install
+%cmake_install
 popd
 done
 
