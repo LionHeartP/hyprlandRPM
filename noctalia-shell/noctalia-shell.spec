@@ -1,16 +1,11 @@
-%global _default_patch_fuzz 2
-
 Name:   	noctalia-shell
-Version:	3.6.2
+Version:	3.7.0
 Release:	%autorelease
 Summary:	A sleek and minimal desktop shell thoughtfully crafted for Wayland, built with Quickshell.
 
 License:	MIT
 URL:		https://github.com/noctalia-dev/%{name}
 Source0:	%{url}/releases/download/v%{version}/noctalia-v%{version}.tar.gz
-
-Patch0:		0001-revert-SystemMonitor-remove-GPU-temp.patch
-#Patch1: 	0001-Hyprland-use-uwsm-logout-function.patch
 
 BuildArch:	noarch
 
@@ -45,6 +40,10 @@ cp -r ./* %{buildroot}/etc/xdg/quickshell/noctalia-shell/
 %{_sysconfdir}/xdg/quickshell/noctalia-shell/
 
 %changelog
+* Tue Dec 09 2025 LionHeartP <LionHeartP@proton.me> - 3.7.0-1
+- Update to 3.7.0
+- Remove patches since functionality has been upstreamed
+
 * Tue Dec 09 2025 LionHeartP <LionHeartP@proton.me> - 3.6.2-1
 - Update to 3.6.2
 
