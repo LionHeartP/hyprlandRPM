@@ -73,6 +73,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/uuctl.1.*
 %{_mandir}/man1/uwsm-app.1.*
 %{_mandir}/man3/%{name}-plugins.3.*
+%{_userpresetdir}/80-fumon.preset
 %{_userunitdir}/fumon.service
 %{_userunitdir}/*-graphical.slice
 %{_userunitdir}/wayland-*.service
