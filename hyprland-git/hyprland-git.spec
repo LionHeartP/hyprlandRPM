@@ -1,8 +1,8 @@
-%global hyprland_commit c87a1a7629c4796a1998a1b26c9097c82e21291b
+%global hyprland_commit 60efbf3f63bec3100477ea9ba6cd634e35d5aeaa
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
-%global bumpver 16
-%global commits_count 6737
-%global commit_date Σαβ Δεκ 20 10:18:22 2025
+%global bumpver 17
+%global commits_count 6739
+%global commit_date Κυρ Δεκ 21 10:50:42 2025
 
 %global protocols_commit 3a5c2bda1c1a4e55cc1330c782547695a93f05b2
 %global protocols_shortcommit %(c=%{protocols_commit}; echo ${c:0:7})
@@ -35,8 +35,6 @@ Source0:        %{url}/releases/download/v%{version}/source-v%{version}.tar.gz
 %endif
 Source4:        macros.hyprland
 Source5:        https://github.com/xkbcommon/libxkbcommon/archive/xkbcommon-%{libxkbcommon_version}/libxkbcommon-%{libxkbcommon_version}.tar.gz
-
-Patch: 		fix_child_windows_commit.patch
 
 %{lua:
 hyprdeps = {
@@ -203,7 +201,6 @@ Requires:       pkgconfig(xkbcommon)
 
 %prep
 %autosetup -n %{?bumpver:Hyprland-%{hyprland_commit}} %{!?bumpver:hyprland-source} -N
-%autopatch -p1
 %if 0%{?fedora} < 43
 mkdir -p subprojects/libxkbcommon
 tar -xf %{SOURCE5} -C subprojects/libxkbcommon --strip=1
