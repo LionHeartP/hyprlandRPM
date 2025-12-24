@@ -1,5 +1,5 @@
 Name:   	noctalia-shell
-Version:	3.7.4
+Version:	3.7.5
 Release:	%autorelease
 Summary:	A sleek and minimal desktop shell thoughtfully crafted for Wayland, built with Quickshell.
 
@@ -40,7 +40,10 @@ cp -r ./* %{buildroot}/etc/xdg/quickshell/noctalia-shell/
 %{_sysconfdir}/xdg/quickshell/noctalia-shell/
 
 %changelog
-* Tue Dec 23 2025 LionHeartP <LionHeartP@proton.me> - 3.7.3-1
+* Wed Dec 24 2025 LionHeartP <LionHeartP@proton.me> - 3.7.5-1
+- Update to 3.7.5
+
+* Tue Dec 23 2025 LionHeartP <LionHeartP@proton.me> - 3.7.4-1
 - Update to 3.7.4
 
 * Tue Dec 23 2025 LionHeartP <LionHeartP@proton.me> - 3.7.2-1

@@ -1,5 +1,5 @@
 %global forgeurl https://github.com/kovidgoyal/kitty
-%global commit0 e9c4e73103ac52cb170cf157803b54381a332203
+%global commit0 c26b7705307f7a832b8be4150da38866945c7abc
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 #global bumpver 1
 
@@ -15,7 +15,7 @@
 %global goipath kitty
 
 Name:           kitty
-Version:        0.44.0%{?bumpver:^%{bumpver}.git%{shortcommit0}}
+Version:        0.45.0%{?bumpver:^%{bumpver}.git%{shortcommit0}}
 Release:        %autorelease
 Summary:        Cross-platform, fast, feature full, GPU based terminal emulator
 
@@ -70,9 +70,6 @@ Source6:        vendor-%{version}.tar.gz
 Source1:        https://raw.githubusercontent.com/kovidgoyal/kitty/46c0951751444e4f4994008f0d2dcb41e49389f4/kitty/data/%{name}.appdata.xml
 
 Source2:        https://github.com/ryanoasis/nerd-fonts/releases/latest/download/NerdFontsSymbolsOnly.tar.xz
-
-# https://github.com/kovidgoyal/kitty/issues/9211
-Patch: 		https://github.com/kovidgoyal/kitty/commit/456fa8691a94f99fae0cef7f19dd2c85c208445a.patch
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}
