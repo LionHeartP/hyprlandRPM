@@ -61,7 +61,8 @@ setcap cap_sys_admin+ep %{_bindir}/gsr-kms-server
 %{_includedir}/gsr/plugin.h
 %{_prefix}/lib/systemd/user/%{name}.service
 %{_prefix}/lib/modprobe.d/gsr-nvidia.conf
-
+%{_mandir}/man1/%{name}.1*
+%{_mandir}/man1/gsr-kms-server.1*
 
 %changelog
 * Thu Dec 25 2025 LionHeartP <LionHeartP@proton.me> - 5.11.1-1
