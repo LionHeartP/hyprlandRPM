@@ -1,9 +1,9 @@
-%global commit 89e23430308553db4decc34aaa3a9de42cbb33cb
+%global commit 813bd56e2c2644ae55759f09f65669abf7be03ce
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 
 Name:    hyprshutdown
 Version: 0
-Release: 3.git%{shortcommit}%{?dist}
+Release: 4.git%{shortcommit}%{?dist}
 Summary: A graceful shutdown utility for Hyprland
 License: BSD-3-Clause license
 URL:     https://github.com/hyprwm/hyprshutdown
