@@ -41,6 +41,7 @@ Summary:        Official plugins for Hyprland
 License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/hyprland-plugins
 Source:         %{url}/archive/%{commit0}/%{name}-%{commit0}.tar.gz
+Patch:		https://github.com/hyprwm/hyprland-plugins/pull/571.patch
 
 BuildRequires:  gcc-c++
 BuildRequires:  cmake
@@ -70,6 +71,9 @@ Requires:      %{hyprlandpkg} = %_hyprland_version\
 
 %prep
 %autosetup -n hyprland-plugins-%{commit0} -p1
+# Fix missing Math:: namespace in hyprtrails
+sed -i 's/invertTransform/Math::invertTransform/g' hyprtrails/trail.cpp
+sed -i 's/wlTransformToHyprutils/Math::wlTransformToHyprutils/g' hyprtrails/trail.cpp
 
 
 %build
