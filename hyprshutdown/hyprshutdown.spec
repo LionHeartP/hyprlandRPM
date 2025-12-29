@@ -3,7 +3,7 @@
 
 Name:    hyprshutdown
 Version: 0
-Release: 4.git%{shortcommit}%{?dist}
+Release: 5.git%{shortcommit}%{?dist}
 Summary: A graceful shutdown utility for Hyprland
 License: BSD-3-Clause license
 URL:     https://github.com/hyprwm/hyprshutdown
