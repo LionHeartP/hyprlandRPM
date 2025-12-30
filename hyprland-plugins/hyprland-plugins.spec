@@ -70,6 +70,8 @@ Requires:      %{hyprlandpkg} = %_hyprland_version\
 
 %prep
 %autosetup -n hyprland-plugins-%{commit0} -p1
+# Fix hyprexpo CTrackpadGestures API change (missing disableInhibit argument)
+sed -i 's/deltaScale)/deltaScale, false)/g' hyprexpo/main.cpp
 
 
 %build
