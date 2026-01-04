@@ -66,6 +66,8 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_bindir}/%{name}-terminal-service
 %{_bindir}/fumon
 %{_bindir}/uuctl
+%{_libexecdir}/%{name}/prepare-env.sh
+%{_libexecdir}/%{name}/signal-handler.sh
 %{_datadir}/%{name}/
 %{_datadir}/applications/uuctl.desktop
 %{_mandir}/man1/%{name}.1.*
