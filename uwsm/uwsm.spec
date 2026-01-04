@@ -1,5 +1,5 @@
 Name:           uwsm
-Version:        0.25.3
+Version:        0.26.0
 Release:        %autorelease
 Summary:        Universal Wayland Session Manager
 
