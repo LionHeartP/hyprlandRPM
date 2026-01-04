@@ -1,5 +1,5 @@
 Name:           hyprtoolkit
-Version:        0.5.1
+Version:        0.5.2
 Release:        %autorelease
 Summary:        A modern C++ Wayland-native GUI toolkit
 
