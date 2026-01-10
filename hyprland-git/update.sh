@@ -61,7 +61,7 @@ copr watch-build "${hyprlandGitBuildId}" && \
 curl "${curl_opts[@]}" "https://copr.fedorainfracloud.org/webhooks/custom/205252/${COPR_WEBHOOK}/hyprland-plugins-git"; }
 
 if [[ $newRelease == "1" ]]; then
-    hyprlandBuildId=$(curl "${curl_opts[@]}" "https://copr.fedorainfracloud.org/webhooks/custom/77569/${COPR_WEBHOOK}/hyprland")
+    hyprlandBuildId=$(curl "${curl_opts[@]}" "https://copr.fedorainfracloud.org/webhooks/custom/205252/${COPR_WEBHOOK}/hyprland")
     copr watch-build "${hyprlandBuildId}"
     curl "${curl_opts[@]}" "https://copr.fedorainfracloud.org/webhooks/custom/205252/${COPR_WEBHOOK}/hyprland-plugins"
     git branch "$newTag"
