@@ -1,5 +1,5 @@
 Name:   	noctalia-shell
-Version:	3.8.2
+Version:	4.0.0
 Release:	%autorelease
 Summary:	A sleek and minimal desktop shell thoughtfully crafted for Wayland, built with Quickshell.
 
@@ -11,7 +11,6 @@ BuildArch:	noarch
 
 Requires:	brightnessctl
 Requires:	dejavu-sans-fonts
-Requires:	gpu-screen-recorder
 Requires:	qt6-qtmultimedia
 Requires:	quickshell
 
