@@ -18,7 +18,6 @@ Recommends:	cava
 Recommends:	cliphist
 Recommends:	ddcutil
 Recommends:	gpu-screen-recorder
-Recommends:	matugen
 Recommends:	power-profiles-daemon
 Recommends:	wlsunset
 
