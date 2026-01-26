@@ -13,6 +13,7 @@ Requires:	brightnessctl
 Requires:	dejavu-sans-fonts
 Requires:	qt6-qtmultimedia
 Requires:	quickshell
+Requires:	ImageMagick
 
 Recommends:	cava
 Recommends:	cliphist
