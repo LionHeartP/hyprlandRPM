@@ -58,6 +58,7 @@ setcap cap_sys_admin+ep %{_bindir}/gsr-kms-server
 %doc README.md
 %{_bindir}/%{name}
 %{_bindir}/gsr-kms-server
+%{_datadir}/%{name}/scripts/*.sh
 %{_includedir}/gsr/plugin.h
 %{_prefix}/lib/systemd/user/%{name}.service
 %{_prefix}/lib/modprobe.d/gsr-nvidia.conf
