@@ -1,14 +1,11 @@
-%global commit 0c9cec7809a715c5c9a99a585db0b596bfb96a59
-%global shortcommit %(c=%{commit}; echo ${c:0:7})
+Name:    	hyprshutdown
+Version: 	0.1.0
+Release: 	%autorelease
+Summary: 	A graceful shutdown utility for Hyprland
+License: 	BSD-3-Clause license
+URL:     	https://github.com/hyprwm/hyprshutdown
 
-Name:    hyprshutdown
-Version: 0
-Release: 6.git%{shortcommit}%{?dist}
-Summary: A graceful shutdown utility for Hyprland
-License: BSD-3-Clause license
-URL:     https://github.com/hyprwm/hyprshutdown
-
-Source: %{url}/archive/%{commit}/%{name}-%{commit}.tar.gz
+Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires: 	gcc-c++
 BuildRequires: 	cmake
@@ -28,7 +25,7 @@ Requires:	systemd
 hyprshutdown is a graceful shutdown/logout utility for Hyprland, which prevents apps from crashing / dying unexpectedly..
 
 %prep
-%autosetup -n %{name}-%{commit} -p1
+%autosetup -p1
 
 %build
 %cmake
