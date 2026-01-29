@@ -1,5 +1,5 @@
 Name:   	noctalia-shell
-Version:	4.2.3
+Version:	4.2.5
 Release:	%autorelease
 Summary:	A sleek and minimal desktop shell thoughtfully crafted for Wayland, built with Quickshell.
 
@@ -26,7 +26,7 @@ Recommends:	wlsunset
 %{summary}
 
 %prep
-%autosetup -n noctalia-release -p1
+%autosetup -n noctalia-release
 
 %build
 
