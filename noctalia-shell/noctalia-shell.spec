@@ -1,6 +1,6 @@
 Name:   	noctalia-shell
 Version:	4.3.1
-Release:	%autorelease -b2
+Release:	%autorelease -b3
 Summary:	A sleek and minimal desktop shell thoughtfully crafted for Wayland, built with Quickshell.
 
 License:	MIT
@@ -33,13 +33,6 @@ Recommends:	wlsunset
 %install
 install -d -m 0755 %{buildroot}/etc/xdg/quickshell/noctalia-shell
 cp -r ./* %{buildroot}/etc/xdg/quickshell/noctalia-shell/
-
-%posttrans
-for user in $(loginctl list-users --no-legend | awk '{print $2}'); do
-    killall -u "$user" qs > /dev/null 2>&1 || :
-    systemd-run --user -M "$user@" --collect \
-        /usr/bin/qs -c noctalia-shell > /dev/null 2>&1 &
-done
 
 %files
 %doc README.md
