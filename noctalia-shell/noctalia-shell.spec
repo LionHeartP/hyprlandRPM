@@ -1,6 +1,6 @@
 Name:   	noctalia-shell
-Version:	4.3.1
-Release:	%autorelease -b3
+Version:	4.3.2
+Release:	%autorelease
 Summary:	A sleek and minimal desktop shell thoughtfully crafted for Wayland, built with Quickshell.
 
 License:	MIT
