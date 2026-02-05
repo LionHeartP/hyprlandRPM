@@ -1,6 +1,6 @@
 Name:           hyprwire
-Version:        0.2.1
-Release:        %autorelease -b2
+Version:        0.3.0
+Release:        %autorelease
 Summary:        A fast and consistent wire protocol for IPC
 
 License:        BSD-3-Clause
