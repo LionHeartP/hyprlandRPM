@@ -1,13 +1,18 @@
+%global commit dacfa9de829ac7cb173825f593236bf2c21f637e
+%global shortcommit %(c=%{commit}; echo ${c:0:7})
+%global build_timestamp %(date +"%Y%m%d")
+%global rel_build 7.git.%{build_timestamp}.%{shortcommit}%{?dist}
+
 %bcond_with         asan
 
 Name:               quickshell
 Version:            0.2.1
-Release:            %autorelease -b6
+Release:            %{rel_build}
 Summary:            Flexible QtQuick based desktop shell toolkit
 
 License:            LGPL-3.0-only AND GPL-3.0-only
 URL:                https://github.com/quickshell-mirror/quickshell
-Source0:            %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
+Source0:            %{url}/archive/%{commit}/%{name}-%{commit}.tar.gz
 
 %if 0%{fedora} >= 42
 BuildRequires:      breakpad-static
@@ -22,10 +27,12 @@ BuildRequires:      ninja-build
 BuildRequires:      pkgconfig(breakpad)
 BuildRequires:      pkgconfig(CLI11)
 BuildRequires:      pkgconfig(gbm)
+BuildRequires:      pkgconfig(glib-2.0)
 BuildRequires:      pkgconfig(jemalloc)
 BuildRequires:      pkgconfig(libdrm)
 BuildRequires:      pkgconfig(libpipewire-0.3)
 BuildRequires:      pkgconfig(pam)
+BuildRequires:      pkgconfig(polkit-agent-1)
 BuildRequires:      pkgconfig(wayland-client)
 BuildRequires:      pkgconfig(wayland-protocols)
 BuildRequires:      qt6-qtbase-private-devel
@@ -42,7 +49,7 @@ Flexible toolkit for making desktop shells with QtQuick, targeting
 Wayland and X11.
 
 %prep
-%autosetup -p1
+%autosetup -n %{name}-%{commit}
 
 %build
 %cmake  -GNinja \
