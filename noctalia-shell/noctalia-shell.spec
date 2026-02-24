@@ -1,6 +1,6 @@
 Name:   	noctalia-shell
 Version:	4.5.0
-Release:	%autorelease
+Release:	%autorelease -b2
 Summary:	A sleek and minimal desktop shell thoughtfully crafted for Wayland, built with Quickshell.
 
 License:	MIT
@@ -11,9 +11,9 @@ BuildArch:	noarch
 
 Requires:	brightnessctl
 Requires:	dejavu-sans-fonts
-Requires:	qt6-qtmultimedia
-Requires:	quickshell
 Requires:	ImageMagick
+Requires:	noctalia-qs
+Requires:	qt6-qtmultimedia
 
 Recommends:	cava
 Recommends:	cliphist
