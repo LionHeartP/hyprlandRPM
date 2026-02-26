@@ -1,7 +1,7 @@
 %bcond_with         asan
 
 Name:               noctalia-qs
-Version:            0.0.2
+Version:            0.0.3
 Release:            %autorelease
 Summary:            Fork of Quickshell - a flexible QtQuick based desktop shell toolkit
 
@@ -69,6 +69,7 @@ noctalia-qs is a custom fork of Quickshell — a flexible QtQuick-based desktop 
 %doc CONTRIBUTING.md
 %doc README.md
 #%%doc changelog/v%%{version}.md
+%{_bindir}/quickshell
 %{_bindir}/qs
 %{_datadir}/applications/dev.noctalia.%{name}.desktop
 %{_datadir}/icons/hicolor/scalable/apps/dev.noctalia.%{name}.svg
