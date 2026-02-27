@@ -1,7 +1,7 @@
 %bcond_with         asan
 
 Name:               noctalia-qs
-Version:            0.0.3
+Version:            0.0.4
 Release:            %autorelease
 Summary:            Fork of Quickshell - a flexible QtQuick based desktop shell toolkit
 
@@ -37,7 +37,10 @@ BuildRequires:      libasan
 
 Conflicts:          quickshell
 Provides:           desktop-notification-daemon
-Obsoletes:          quickshell <= 0.2.2
+Obsoletes:          quickshell < 0.2.2
+Obsoletes:          quickshell-git < 0.2.2
+Provides:           quickshell >= 0.2.3
+Provides:           quickshell-git >= 0.2.3
 
 %description
 noctalia-qs is a custom fork of Quickshell — a flexible QtQuick-based desktop shell toolkit for Wayland. It serves as the shell framework powering Noctalia Shell.
