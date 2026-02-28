@@ -202,6 +202,7 @@ Requires:       pkgconfig(xkbcommon)
 
 %prep
 %autosetup -n %{?bumpver:Hyprland-%{hyprland_commit}} %{!?bumpver:hyprland-source} -N
+%autopatch -p1
 %if 0%{?fedora} < 43
 mkdir -p subprojects/libxkbcommon
 tar -xf %{SOURCE5} -C subprojects/libxkbcommon --strip=1
