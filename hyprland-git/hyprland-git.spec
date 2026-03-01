@@ -1,8 +1,8 @@
-%global hyprland_commit e333a330c0ddb07db39028fa8b3a47b3f7d21b5f
+%global hyprland_commit 2928d6af0ad1fa9f950c4ea8394739a468b5e34f
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
-%global bumpver 3
-%global commits_count 6942
-%global commit_date Σαβ Φεβ 28 06:19:29 2026
+%global bumpver 4
+%global commits_count 6952
+%global commit_date Σαβ Φεβ 28 11:06:27 2026
 
 %global protocols_commit 3a5c2bda1c1a4e55cc1330c782547695a93f05b2
 %global protocols_shortcommit %(c=%{protocols_commit}; echo ${c:0:7})
@@ -35,7 +35,6 @@ Source0:        %{url}/releases/download/v%{version}/source-v%{version}.tar.gz
 %endif
 Source4:        macros.hyprland
 Source5:        https://github.com/xkbcommon/libxkbcommon/archive/xkbcommon-%{libxkbcommon_version}/libxkbcommon-%{libxkbcommon_version}.tar.gz
-Patch:		https://github.com/hyprwm/Hyprland/pull/13429.patch
 
 %{lua:
 hyprdeps = {
@@ -202,7 +201,6 @@ Requires:       pkgconfig(xkbcommon)
 
 %prep
 %autosetup -n %{?bumpver:Hyprland-%{hyprland_commit}} %{!?bumpver:hyprland-source} -N
-%autopatch -p1
 %if 0%{?fedora} < 43
 mkdir -p subprojects/libxkbcommon
 tar -xf %{SOURCE5} -C subprojects/libxkbcommon --strip=1
