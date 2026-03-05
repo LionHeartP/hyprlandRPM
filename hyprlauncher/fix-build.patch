@@ -1,0 +1,25 @@
+diff --git a/src/config/ConfigManager.cpp b/src/config/ConfigManager.cpp
+index 6f2fa51..8daaf08 100644
+--- a/src/config/ConfigManager.cpp
++++ b/src/config/ConfigManager.cpp
+@@ -4,6 +4,9 @@
+ 
+ #include <hyprutils/path/Path.hpp>
+ 
++#include <unistd.h>
++#include <climits>
++
+ CConfigManager::CConfigManager() : m_inotifyFd(inotify_init()) {
+     const auto CFGPATH = Hyprutils::Path::findConfig("hyprlauncher").first.value_or("");
+     m_configPath       = CFGPATH;
+diff --git a/src/finders/desktop/DesktopFinder.cpp b/src/finders/desktop/DesktopFinder.cpp
+index 9bdfb8d..9b4fb5b 100644
+--- a/src/finders/desktop/DesktopFinder.cpp
++++ b/src/finders/desktop/DesktopFinder.cpp
+@@ -1,5 +1,6 @@
+ #include "DesktopFinder.hpp"
+ #include "../../helpers/Log.hpp"
++#include <unistd.h>
+ #include "../Fuzzy.hpp"
+ #include "../Cache.hpp"
+ #include "../../config/ConfigManager.hpp"
