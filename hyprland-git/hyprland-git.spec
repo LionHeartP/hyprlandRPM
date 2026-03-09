@@ -1,8 +1,8 @@
-%global hyprland_commit a4ecae91600d7e8ceb31610176d6b40cb816711b
+%global hyprland_commit e172a26b5b6ee9d38107fa648f7b3a9acaca2e54
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
-%global bumpver 5
-%global commits_count 7006
-%global commit_date Sat Mar 07 07:53:34 2026
+%global bumpver 6
+%global commits_count 7009
+%global commit_date Mon Mar 09 04:47:50 2026
 
 %global protocols_commit 3a5c2bda1c1a4e55cc1330c782547695a93f05b2
 %global protocols_shortcommit %(c=%{protocols_commit}; echo ${c:0:7})
@@ -36,7 +36,7 @@ Source0:        %{url}/releases/download/v%{version}/source-v%{version}.tar.gz
 Source4:        macros.hyprland
 Source5:        https://github.com/xkbcommon/libxkbcommon/archive/xkbcommon-%{libxkbcommon_version}/libxkbcommon-%{libxkbcommon_version}.tar.gz
 
-Patch:		https://github.com/hyprwm/Hyprland/pull/13641.patch
+Patch:		https://github.com/hyprwm/Hyprland/pull/13650.patch
 
 %{lua:
 hyprdeps = {
