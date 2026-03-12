@@ -1,7 +1,7 @@
 %bcond_with         asan
 
 Name:               noctalia-qs
-Version:            0.0.7
+Version:            0.0.8
 Release:            %autorelease
 Summary:            Fork of Quickshell - a flexible QtQuick based desktop shell toolkit
 
@@ -59,7 +59,8 @@ noctalia-qs is a custom fork of Quickshell — a flexible QtQuick-based desktop 
         -DDISTRIBUTOR="Fedora COPR (lionheartp/Hyprland)" \
         -DDISTRIBUTOR_DEBUGINFO_AVAILABLE=YES \
         -DGIT_REVISION=%{commit} \
-        -DINSTALL_QML_PREFIX=%{_lib}/qt6/qml
+        -DINSTALL_QML_PREFIX=%{_lib}/qt6/qml \
+        -DLTO=ON
 %cmake_build
 
 %install
