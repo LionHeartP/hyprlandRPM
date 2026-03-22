@@ -1,4 +1,6 @@
 %bcond_with check
+# Avoid issues with Rust attributes being mistaken for shebangs
+%global __brp_mangle_shebangs_exclude_from ^/usr/src/debug/.*$
 
 Name:           matugen
 Version:        4.1.0
