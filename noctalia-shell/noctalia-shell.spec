@@ -15,7 +15,6 @@ Requires:	ImageMagick
 Requires:	noctalia-qs
 Requires:	qt6-qtmultimedia
 
-Recommends:	cava
 Recommends:	cliphist
 Recommends:	ddcutil
 Recommends:	gpu-screen-recorder
