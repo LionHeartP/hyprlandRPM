@@ -1,8 +1,8 @@
 %bcond_with         asan
 
 Name:               noctalia-qs
-Version:            0.0.10
-Release:            %autorelease -b2
+Version:            0.0.11
+Release:            %autorelease
 Summary:            Fork of Quickshell - a flexible QtQuick based desktop shell toolkit
 
 License:            LGPL-3.0-only AND GPL-3.0-only
