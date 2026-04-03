@@ -2,7 +2,7 @@
 %bcond_with check
 
 Name:           awww
-Version:        0.11.2
+Version:        0.12.0
 Release:        %autorelease
 Summary:        Efficient animated wallpaper daemon for wayland, controlled at runtime
 # 0BSD OR MIT OR Apache-2.0
@@ -53,11 +53,12 @@ cargo vendor
 %{cargo_vendor_manifest}
 
 %install
-install -Dpm755 target/release/swww %{buildroot}%{_bindir}/swww
-install -Dpm755 target/release/swww-daemon %{buildroot}%{_bindir}/swww-daemon
-install -Dpm644 completions/_swww %{buildroot}%{zsh_completions_dir}/_swww
-install -Dpm644 completions/swww.bash %{buildroot}%{bash_completions_dir}/swww
-install -Dpm644 completions/swww.fish %{buildroot}%{fish_completions_dir}/swww.fish
+install -Dpm755 target/release/%{name} %{buildroot}%{_bindir}/%{name}
+install -Dpm755 target/release/%{name}-daemon %{buildroot}%{_bindir}/%{name}-daemon
+install -Dpm644 completions/_%{name} %{buildroot}%{zsh_completions_dir}/_%{name}
+install -Dpm644 completions/%{name}.bash %{buildroot}%{bash_completions_dir}/%{name}
+install -Dpm644 completions/%{name}.fish %{buildroot}%{fish_completions_dir}/%{name}.fish
+install -Dpm644 completions/%{name}.elv %{buildroot}%{_datadir}/elvish/lib/completions/%{name}.elv
 install -Dpm644 ./doc/generated/*.1 -t %{buildroot}%{_mandir}/man1
 
 %if %{with check}
@@ -71,12 +72,13 @@ install -Dpm644 ./doc/generated/*.1 -t %{buildroot}%{_mandir}/man1
 %license cargo-vendor.txt
 %doc CHANGELOG.md
 %doc README.md
-%{_bindir}/swww
-%{_bindir}/swww-daemon
-%{_mandir}/man1/swww*.1.*
-%{bash_completions_dir}/swww
-%{fish_completions_dir}/swww.fish
-%{zsh_completions_dir}/_swww
+%{_bindir}/%{name}
+%{_bindir}/%{name}-daemon
+%{_mandir}/man1/%{name}*.1.*
+%{bash_completions_dir}/%{name}
+%{fish_completions_dir}/%{name}.fish
+%{zsh_completions_dir}/_%{name}
+%{_datadir}/elvish/lib/completions/%{name}.elv
 
 %changelog
 %autochangelog
