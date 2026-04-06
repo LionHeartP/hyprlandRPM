@@ -14,7 +14,7 @@ BuildRequires:  cmake
 BuildRequires:  gcc-c++
 
 BuildRequires:  pkgconfig(cairo)
-BuildRequires:  pkgconfig(egl)
+BuildRequires:  pkgconfig(glesv2)
 BuildRequires:  pkgconfig(hyprutils)
 BuildRequires:  pkgconfig(libjpeg)
 BuildRequires:  pkgconfig(libjxl_cms)
