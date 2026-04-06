@@ -16,6 +16,7 @@ BuildRequires:  gcc-c++
 BuildRequires:  pkgconfig(cairo)
 BuildRequires:  pkgconfig(glesv2)
 BuildRequires:  pkgconfig(hyprutils)
+BuildRequires:  pkgconfig(libdrm)
 BuildRequires:  pkgconfig(libjpeg)
 BuildRequires:  pkgconfig(libjxl_cms)
 BuildRequires:  pkgconfig(libjxl_threads)
