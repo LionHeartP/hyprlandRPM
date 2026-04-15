@@ -13,22 +13,22 @@ jobs:
       matrix:
         version:
           - rawhide
+          - 45
+          - 44
           - 43
-          - 42
-          - 41
     container:
       image: registry.fedoraproject.org/fedora:${{ matrix.version }}
     steps:
       - name: Prepare
         run: |
           cat << 'EOF' >> /etc/yum.repos.d/coprs.repo
-          [copr:copr.fedorainfracloud.org:solopasha:hyprland]
-          name=Copr repo for hyprland owned by solopasha
-          baseurl=https://download.copr.fedorainfracloud.org/results/solopasha/hyprland/fedora-$releasever-$basearch/
+          [copr:copr.fedorainfracloud.org:lionheartp:Hyprland]
+          name=Copr repo for Hyprland owned by LionHeartP
+          baseurl=https://download.copr.fedorainfracloud.org/results/lionheartp/Hyprland/fedora-$releasever-$basearch/
           type=rpm-md
           skip_if_unavailable=True
           gpgcheck=1
-          gpgkey=https://download.copr.fedorainfracloud.org/results/solopasha/hyprland/pubkey.gpg
+          gpgkey=https://download.copr.fedorainfracloud.org/results/lionheartp/Hyprland/pubkey.gpg
           repo_gpgcheck=0
           enabled=1
           enabled_metadata=1
@@ -37,11 +37,11 @@ jobs:
       - name: Repoclosure
         run: |
           dnf repoclosure \
-            --check copr:copr.fedorainfracloud.org:solopasha:hyprland \
+            --check copr:copr.fedorainfracloud.org:lionheartp:Hyprland \
             --newest
 
       - name: Repoclosure (with --best)
         run: |
           dnf repoclosure \
-            --check copr:copr.fedorainfracloud.org:solopasha:hyprland \
+            --check copr:copr.fedorainfracloud.org:lionheartp:Hyprland \
             --newest --best
