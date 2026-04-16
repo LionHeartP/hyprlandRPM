@@ -33,16 +33,3 @@ A collection of Hyprland and related packages:
 * **[uwsm](https://github.com/Vladimir-csp/uwsm)** [(spec)](https://github.com/solopasha/hyprlandRPM/blob/master/uwsm/uwsm.spec) - Universal Wayland Session Manager.
 * **[qt6ct-kde](https://github.com/ilya-fedin/qt6ct)** [(spec)](https://github.com/solopasha/hyprlandRPM/blob/master/qt6ct-kde/qt6ct.spec) - Qt6 Configuration Utility, patched for proper integration with KDE applications.
 * **[hyprqt6engine](https://github.com/hyprwm/hyprqt6engine)** [(spec)](https://github.com/solopasha/hyprlandRPM/blob/master/hyprqt6engine/hyprqt6engine.spec) - Qt6 Theme Provider for Hyprland.
-
-## If you find this repository helpful, please consider supporting it with a donation
-## WARNING: I AM NOT THE OWNER OF THESE ACCOUNTS. These belong to [solopasha](https://github.com/solopasha/), the original creator of this repo!
-
-TJWXhcsoGQbbJTe9uxHd5QjdDu9yU7b2S3 (USDT TRC20)
-
-TJWXhcsoGQbbJTe9uxHd5QjdDu9yU7b2S3 (Tron)
-
-0x03b1C69d364119441c6a6B41Aeb4859E62dFc366 (USDT Ethereum)
-
-bc1qna5rg328tdufshjhtjtkq69nraclqy4x77jr7w (BTC)
-
-0x03b1C69d364119441c6a6B41Aeb4859E62dFc366 (ETH)
