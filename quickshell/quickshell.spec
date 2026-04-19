@@ -72,6 +72,13 @@ Wayland and X11.
 %install
 %cmake_install
 
+# Remove vendored files we don't want to package
+rm -rf %{buildroot}%{_includedir}/{cpptrace,ctrace,dwarf.h,libdwarf.h,zstd.h,zdict.h,zstd_errors.h}
+rm -rf %{buildroot}%{_libdir}/{libcpptrace.a,libdwarf.a,libzstd.a}
+rm -rf %{buildroot}%{_libdir}/cmake/{cpptrace,libdwarf,zstd}
+rm -rf %{buildroot}%{_libdir}/pkgconfig/{libdwarf.pc,libzstd.pc}
+rm -rf %{buildroot}%{_datadir}/cpptrace
+
 %files
 %license LICENSE
 %license LICENSE-GPL
