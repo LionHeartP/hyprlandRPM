@@ -23,6 +23,7 @@ BuildRequires:      cmake(Qt6Qml)
 BuildRequires:      cmake(Qt6ShaderTools)
 BuildRequires:      cmake(Qt6WaylandClient)
 BuildRequires:      gcc-c++
+BuildRequires:      git
 BuildRequires:      ninja-build
 BuildRequires:      pkgconfig(breakpad)
 BuildRequires:      pkgconfig(CLI11)
@@ -31,6 +32,7 @@ BuildRequires:      pkgconfig(glib-2.0)
 BuildRequires:      pkgconfig(jemalloc)
 BuildRequires:      pkgconfig(libdrm)
 BuildRequires:      pkgconfig(libpipewire-0.3)
+BuildRequires:      pkgconfig(libunwind-generic)
 BuildRequires:      pkgconfig(pam)
 BuildRequires:      pkgconfig(polkit-agent-1)
 BuildRequires:      pkgconfig(wayland-client)
@@ -43,6 +45,7 @@ BuildRequires:      libasan
 %endif
 
 Provides:           desktop-notification-daemon
+Provides:           bundled(cpptrace) = 1.0.4
 Conflicts:          noctalia-qs
 
 %description
@@ -62,7 +65,8 @@ Wayland and X11.
         -DDISTRIBUTOR="Fedora COPR (lionheartp/Hyprland)" \
         -DDISTRIBUTOR_DEBUGINFO_AVAILABLE=YES \
         -DGIT_REVISION=%{commit} \
-        -DINSTALL_QML_PREFIX=%{_lib}/qt6/qml
+        -DINSTALL_QML_PREFIX=%{_lib}/qt6/qml \
+        -DVENDOR_CPPTRACE=ON
 %cmake_build
 
 %install
