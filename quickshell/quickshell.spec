@@ -43,6 +43,7 @@ BuildRequires:      libasan
 %endif
 
 Provides:           desktop-notification-daemon
+Conflicts:          noctalia-qs
 
 %description
 Flexible toolkit for making desktop shells with QtQuick, targeting
