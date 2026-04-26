@@ -17,9 +17,14 @@ BuildRequires:  cmake(Qt6Quick)
 BuildRequires:  cmake(Qt6QuickControls2)
 BuildRequires:  cmake(Qt6WaylandClient)
 BuildRequires:  cmake(Qt6Widgets)
+BuildRequires:  glaze-static
 BuildRequires:  qt6-qtbase-private-devel
 BuildRequires:  wayland-devel
 BuildRequires:  pkgconfig(hyprutils)
+BuildRequires:  pkgconfig(hyprtoolkit)
+BuildRequires:  pkgconfig(libdrm)
+BuildRequires:  pkgconfig(libpci)
+BuildRequires:  pkgconfig(pixman-1)
 
 Requires:       /usr/bin/lscpu
 Requires:       /usr/bin/lspci
