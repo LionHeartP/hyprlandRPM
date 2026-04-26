@@ -34,7 +34,6 @@ Source3:        https://github.com/canihavesomecoffee/udis86/archive/%{udis86_co
 Source0:        %{url}/releases/download/v%{version}/source-v%{version}.tar.gz
 %endif
 Source4:        macros.hyprland
-Source5:        https://github.com/xkbcommon/libxkbcommon/archive/xkbcommon-%{libxkbcommon_version}/libxkbcommon-%{libxkbcommon_version}.tar.gz
 
 %{lua:
 hyprdeps = {
@@ -64,6 +63,7 @@ hyprdeps = {
     "pkgconfig(libliftoff)",
     "pkgconfig(libseat)",
     "pkgconfig(libudev)",
+    "pkgconfig(lua) >= 5.5.0",
     "pkgconfig(pango)",
     "pkgconfig(pangocairo)",
     "pkgconfig(pixman-1)",
@@ -203,11 +203,8 @@ Requires:       pkgconfig(xkbcommon)
 
 %prep
 %autosetup -n %{?bumpver:Hyprland-%{hyprland_commit}} %{!?bumpver:hyprland-source} -N
-%if 0%{?fedora} < 43
-mkdir -p subprojects/libxkbcommon
-tar -xf %{SOURCE5} -C subprojects/libxkbcommon --strip=1
-%endif
-
+# Fedora names it lua.pc . The correct version is ensured in the BuildRequires section
+sed -i 's/lua55/lua/g' CMakeLists.txt
 %if 0%{?bumpver}
 tar -xf %{SOURCE2} -C subprojects/hyprland-protocols --strip=1
 tar -xf %{SOURCE3} -C subprojects/udis86 --strip=1
