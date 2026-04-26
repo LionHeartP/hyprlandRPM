@@ -1,6 +1,6 @@
 %global hyprland_commit 13d3695dd114f77da1258f041247306d485ed18e
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
-%global bumpver 29
+%global bumpver 30
 %global commits_count 7177
 %global commit_date Sun Apr 26 02:16:54 2026
 
@@ -63,7 +63,7 @@ hyprdeps = {
     "pkgconfig(libliftoff)",
     "pkgconfig(libseat)",
     "pkgconfig(libudev)",
-    "pkgconfig(lua) >= 5.5.0",
+    "pkgconfig(lua)",
     "pkgconfig(pango)",
     "pkgconfig(pangocairo)",
     "pkgconfig(pixman-1)",
@@ -90,12 +90,10 @@ hyprdeps = {
     "pkgconfig(xcb-xinput)",
     "pkgconfig(xcb)",
     "pkgconfig(xcursor)",
+    "pkgconfig(xkbcommon)",
     "pkgconfig(xwayland)",
     }
 }
-%if 0%{?fedora} > 42
-BuildRequires:  pkgconfig(xkbcommon)
-%endif
 
 %define printbdeps(r) %{lua:
 for _, dep in ipairs(hyprdeps) do
@@ -111,20 +109,9 @@ BuildRequires:  gcc-toolset-15-gcc-c++
 BuildRequires:  gcc-toolset-15-annobin-plugin-gcc
 %endif
 
-%if 0%{?fedora} < 43
-BuildRequires:  byacc flex bison
-BuildRequires:  xorg-x11-proto-devel libX11-devel
-BuildRequires:  xkeyboard-config-devel
-BuildRequires:  pkgconfig(xcb-xkb)
-BuildRequires:  libxml2-devel
-%endif
-
 # udis86 is packaged in Fedora, but the copy bundled here is actually a
 # modified fork.
 Provides:       bundled(udis86) = 1.7.2^1.%{udis86_shortcommit}
-%if 0%{?fedora} < 43
-Provides:       bundled(libxkbcommon) = %{libxkbcommon_version}
-%endif
 
 Requires:       xorg-x11-server-Xwayland%{?_isa}
 Requires:       aquamarine%{?_isa} >= 0.9.2
@@ -229,16 +216,6 @@ sed -i \
 
 %if 0%{?rhel} == 10
 source /usr/lib/gcc-toolset/15-env.source
-%endif
-
-%if 0%{?fedora} < 43
-pushd subprojects/libxkbcommon > /dev/null
-%meson -Denable-tools=false -Ddefault_library=static
-%meson_build
-DESTDIR=%{_builddir}/libxkbcommon-build meson install -C %{_vpath_builddir} --no-rebuild
-popd > /dev/null
-export PKG_CONFIG_PATH=%{_builddir}/libxkbcommon-build/%{_libdir}/pkgconfig
-%global optflags %{optflags} -I%{_builddir}/libxkbcommon-build/%{_includedir} -L%{_builddir}/libxkbcommon-build/%{_libdir}
 %endif
 
 %cmake \
