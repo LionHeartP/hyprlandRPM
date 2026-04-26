@@ -1,12 +1,11 @@
 Name:           hyprlauncher
-Version:        0.1.5
-Release:        %autorelease -b3
+Version:        0.1.6
+Release:        %autorelease
 Summary:        A multipurpose and versatile launcher / picker for Hyprland
 
 License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/hyprlauncher
 Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
-Patch:		fix-build.patch
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}

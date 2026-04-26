@@ -1,11 +1,10 @@
 Name:           hyprsysteminfo
-Version:        0.1.3
-Release:        %autorelease -b15
+Version:        0.2.0
+Release:        %autorelease
 Summary:        An application to display information about the running system
 License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/hyprsysteminfo
 Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
-Patch:          fix-build.diff
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}
