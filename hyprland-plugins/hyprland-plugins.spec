@@ -64,6 +64,8 @@ Requires:      %{hyprlandpkg} = %_hyprland_version\
 
 %prep
 %autosetup -n hyprland-plugins-%{commit0} -p1
+# Fix INT_MAX missing header (blocker for Fedora 44/Rawhide)
+sed -i '1i #include <climits>' hyprbars/barDeco.cpp
 
 %build
 for plugin in %{plugins}
