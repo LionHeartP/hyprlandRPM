@@ -5,10 +5,8 @@
 %global __provides_exclude_from ^(%{_libdir}/hyprland/.*\\.so)$
 
 %global plugins %{shrink:
-                #borders-plus-plus
                 csgo-vulkan-fix
                 hyprbars
-                #hyprexpo
                 hyprfocus
                 hyprwinwrap
                 xtra-dispatchers
