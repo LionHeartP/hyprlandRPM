@@ -8,8 +8,6 @@
                 csgo-vulkan-fix
                 hyprbars
                 hyprfocus
-                hyprwinwrap
-                xtra-dispatchers
 }
 
 %if !%{defined build_for}
