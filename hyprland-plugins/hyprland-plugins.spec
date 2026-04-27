@@ -1,6 +1,6 @@
 %global commit0 6c0d26b2676f71f4c382d34c5a59491b0aafd03d
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global bumpver 1503
+%global bumpver 1504
 
 %global __provides_exclude_from ^(%{_libdir}/hyprland/.*\\.so)$
 
@@ -64,8 +64,6 @@ Requires:      %{hyprlandpkg} = %_hyprland_version\
 
 %prep
 %autosetup -n hyprland-plugins-%{commit0} -p1
-# Fix INT_MAX missing header (blocker for Fedora 44/Rawhide)
-sed -i '1i #include <climits>' hyprbars/barDeco.cpp
 
 %build
 for plugin in %{plugins}
