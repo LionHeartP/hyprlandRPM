@@ -1,12 +1,12 @@
 Name:    	hyprshutdown
 Version: 	0.1.0
-Release: 	%autorelease -b4
+Release: 	%autorelease -b5
 Summary: 	A graceful shutdown utility for Hyprland
 License: 	BSD-3-Clause license
 URL:     	https://github.com/hyprwm/hyprshutdown
 
 Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
-Patch:		fix-for-lua.patch
+Patch:		https://github.com/hyprwm/hyprshutdown/pull/24.patch
 
 BuildRequires: 	gcc-c++
 BuildRequires: 	cmake
