@@ -1,15 +1,13 @@
 Name:           hyprtoolkit
 Version:        0.5.3
-Release:        %autorelease -b3
+Release:        %autorelease -b4
 Summary:        A modern C++ Wayland-native GUI toolkit
 
 License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/hyprtoolkit
 Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
-%if 0%{?fedora} >= 44
 Patch:		https://github.com/hyprwm/hyprtoolkit/commit/7c41a2729335e146cea4bdd8843aea0e5c146aba.patch
-%endif
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}
