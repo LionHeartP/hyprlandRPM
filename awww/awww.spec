@@ -2,7 +2,7 @@
 %bcond_with check
 
 Name:           awww
-Version:        0.12.0
+Version:        0.12.1
 Release:        %autorelease
 Summary:        Efficient animated wallpaper daemon for wayland, controlled at runtime
 # 0BSD OR MIT OR Apache-2.0
