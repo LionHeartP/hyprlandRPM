@@ -1,12 +1,13 @@
 %global commit0 473804b3594dd829295484f1f479a560b8114f2d
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global bumpver 1514
+%global bumpver 1513
 
 %global __provides_exclude_from ^(%{_libdir}/hyprland/.*\\.so)$
 
 %global plugins %{shrink:
                 csgo-vulkan-fix
                 hyprbars
+                hyprexpo
                 hyprfocus
 }
 
@@ -36,6 +37,9 @@ License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/hyprland-plugins
 Source:         %{url}/archive/%{commit0}/%{name}-%{commit0}.tar.gz
 
+#Hyprexpo fix
+Patch:          https://github.com/hyprwm/hyprland-plugins/pull/650.patch
+
 BuildRequires:  gcc-c++
 BuildRequires:  cmake
 BuildRequires:  %{hyprlandpkg}-devel
@@ -64,6 +68,12 @@ Requires:      %{hyprlandpkg} = %_hyprland_version\
 
 %prep
 %autosetup -n hyprland-plugins-%{commit0} -p1
+# Hyprfocus temp fix
+sed -i 's/\bm_activeInactiveAlpha\b/m_alpha/g' hyprfocus/main.cpp
+sed -i 's/m_alpha\[0\]/m_alpha[(Desktop::View::eWindowAlpha)0]/g' hyprfocus/main.cpp
+sed -i 's/m_alpha->/m_alpha[(Desktop::View::eWindowAlpha)0]->/g' hyprfocus/main.cpp
+sed -i 's/\*window->m_alpha/(*window->m_alpha[(Desktop::View::eWindowAlpha)0])/g' hyprfocus/main.cpp
+sed -i 's/\*w->m_alpha/(*w->m_alpha[(Desktop::View::eWindowAlpha)0])/g' hyprfocus/main.cpp
 
 %build
 for plugin in %{plugins}
