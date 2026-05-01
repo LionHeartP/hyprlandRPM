@@ -10,7 +10,7 @@ Summary:	A lightweight Wayland shell and bar built directly on Wayland + OpenGL 
 License:	MIT
 URL:		https://github.com/noctalia-dev/%{upstreamname}
 Source0:	%{url}/archive/%{commit}/%{upstreamname}-%{commit}.tar.gz
-Patch:		hyprlua.patch
+Patch:		0001-prepare-for-hyprland-lua-config.patch
 
 BuildRequires:  meson
 BuildRequires:  gcc-c++
