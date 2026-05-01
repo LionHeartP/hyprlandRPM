@@ -1,16 +1,16 @@
-%global commit          8aa160df135ee1510e0239f26565f1bd9f3c1a05
+%global commit          e9c40a200a58337c428ee9cb7729718dd18a850a
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
-%global build_timestamp %(date +"%Y%m%d")
 %global upstreamname    noctalia-shell
 
 Name:   	noctalia-shell-v5
 Version:	5.0.0
-Release:	0.5.%{build_timestamp}git%{shortcommit}%{?dist}
+Release:	0.6.git%{shortcommit}%{?dist}
 Summary:	A lightweight Wayland shell and bar built directly on Wayland + OpenGL ES, with no Qt or GTK dependency.
 
 License:	MIT
 URL:		https://github.com/noctalia-dev/%{upstreamname}
 Source0:	%{url}/archive/%{commit}/%{upstreamname}-%{commit}.tar.gz
+Patch:		hyprlua.patch
 
 BuildRequires:  meson
 BuildRequires:  gcc-c++
@@ -48,7 +48,7 @@ Recommends:     wlsunset
 %{summary}
 
 %prep
-%autosetup -n %{upstreamname}-%{commit}
+%autosetup -n %{upstreamname}-%{commit} -p1
 
 %build
 %meson

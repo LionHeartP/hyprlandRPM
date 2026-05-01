@@ -1,0 +1,127 @@
+diff --git a/src/compositors/hyprland/hyprland_output_backend.cpp b/src/compositors/hyprland/hyprland_output_backend.cpp
+index 712a5da64..a91243ed0 100644
+--- a/src/compositors/hyprland/hyprland_output_backend.cpp
++++ b/src/compositors/hyprland/hyprland_output_backend.cpp
+@@ -1,9 +1,31 @@
+ #include "compositors/hyprland/hyprland_output_backend.h"
+-
+ #include "core/process.h"
+ 
++#include <format>
++#include <json.hpp>
++
+ namespace compositors::hyprland {
+ 
+-  bool setOutputPower(bool on) { return process::runAsync({"hyprctl", "dispatch", "dpms", on ? "on" : "off"}); }
++  bool isLuaProvider() {
++    const auto result = process::runSync({"hyprctl", "-j", "status"});
++    if (result) {
++      try {
++        auto j = nlohmann::json::parse(result.out);
++        return j.value("configProvider", "") == "lua";
++      } catch (...) {
++        return false;
++      }
++    }
++    return false;
++  }
++
++  bool setOutputPower(bool on) {
++    const std::string action = on ? "on" : "off";
++    if (isLuaProvider()) {
++      const std::string luaCmd = std::format("hl.dsp.dpms({{ action = \"{}\" }})", action);
++      return process::runAsync({"hyprctl", "dispatch", luaCmd});
++    }
++    return process::runAsync({"hyprctl", "dispatch", "dpms", action});
++  }
+ 
+ } // namespace compositors::hyprland
+diff --git a/src/compositors/hyprland/hyprland_workspace_backend.cpp b/src/compositors/hyprland/hyprland_workspace_backend.cpp
+index 7fd577d5c..f724b7bb7 100644
+--- a/src/compositors/hyprland/hyprland_workspace_backend.cpp
++++ b/src/compositors/hyprland/hyprland_workspace_backend.cpp
+@@ -117,7 +117,12 @@ void HyprlandWorkspaceBackend::activate(const std::string& id) {
+   }
+ 
+   std::string response;
+-  (void)sendRequest(std::format("dispatch workspace {}", id), response);
++  std::string cmd;
++  if (m_useLua)
++      cmd = std::format("/dispatch hl.dsp.focus({{ workspace = '{}' }})", id);
++  else
++      cmd = std::format("dispatch workspace {}", id);
++  (void)sendRequest(cmd, response);
+ }
+ 
+ void HyprlandWorkspaceBackend::activateForOutput(wl_output* /*output*/, const std::string& id) { activate(id); }
+@@ -305,6 +310,14 @@ std::optional<nlohmann::json> HyprlandWorkspaceBackend::requestJson(const std::s
+ }
+ 
+ void HyprlandWorkspaceBackend::refreshSnapshot() {
++  const auto status = requestJson("j/status");
++  if (status && status->is_object()) {
++      std::string provider = status->value("configProvider", "hyprlang");
++      m_useLua = (provider == "lua");
++      kLog.info("[workspace_hyprland] Provider detected: {}", provider);
++  } else {
++      kLog.warn("[workspace_hyprland] Failed to fetch Hyprland status JSON");
++  }
+   refreshWorkspaces();
+   refreshMonitors();
+   refreshClients();
+diff --git a/src/compositors/hyprland/hyprland_workspace_backend.h b/src/compositors/hyprland/hyprland_workspace_backend.h
+index 20d3c5267..2c87c1847 100644
+--- a/src/compositors/hyprland/hyprland_workspace_backend.h
++++ b/src/compositors/hyprland/hyprland_workspace_backend.h
+@@ -85,4 +85,5 @@ private:
+   std::string m_focusedMonitor;
+   std::size_t m_nextOrdinal = 0;
+   ChangeCallback m_changeCallback;
++  bool m_useLua = false;
+ };
+diff --git a/src/shell/session/session_panel.cpp b/src/shell/session/session_panel.cpp
+index 25def50d7..85b9a9bfd 100644
+--- a/src/shell/session/session_panel.cpp
++++ b/src/shell/session/session_panel.cpp
+@@ -17,6 +17,7 @@
+ 
+ #include <algorithm>
+ #include <cstdlib>
++#include <json.hpp>
+ #include <memory>
+ #include <utility>
+ #include <xkbcommon/xkbcommon-keysyms.h>
+@@ -39,12 +40,31 @@ namespace {
+       {SessionPanel::ActionId::Shutdown, "session.actions.shutdown", "shutdown", ButtonVariant::Destructive},
+   }};
+ 
++  bool isHyprlandLua() {
++    const auto result = process::runSync({"hyprctl", "-j", "status"});
++    if (result) {
++      try {
++        auto j = nlohmann::json::parse(result.out);
++        return j.value("configProvider", "") == "lua";
++      } catch (...) {
++        return false;
++      }
++    }
++    return false;
++  }
++  
+   bool doLogout() {
+     // Prefer compositor-native exits where available.
+     switch (compositors::detect()) {
+     case compositors::CompositorKind::Hyprland:
+-      if (process::runSync({"hyprctl", "dispatch", "exit"})) {
+-        return true;
++      if (isHyprlandLua()) {
++        if (process::runSync({"hyprctl", "dispatch", "hl.dsp.exit()"})) {
++          return true;
++        }
++      } else {
++        if (process::runSync({"hyprctl", "dispatch", "exit"})) {
++          return true;
++        }
+       }
+       break;
+     case compositors::CompositorKind::Sway:
