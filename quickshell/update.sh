@@ -3,7 +3,7 @@ set -euxo pipefail
 
 SPEC_FILE="quickshell.spec"
 REPO="quickshell-mirror/quickshell"
-BRANCH="main"
+BRANCH="master"
 ec=0
 
 oldVersion="$(rpmspec -q --qf "%{version}\n" "$SPEC_FILE" | head -1)"
