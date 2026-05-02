@@ -7,8 +7,6 @@ License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/hyprtoolkit
 Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
-Patch:		https://github.com/hyprwm/hyprtoolkit/commit/7c41a2729335e146cea4bdd8843aea0e5c146aba.patch
-
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}
 
