@@ -5,10 +5,14 @@
 %global __provides_exclude_from ^(%{_libdir}/hyprland/.*\\.so)$
 
 %global plugins %{shrink:
+                borders-plus-plus
                 csgo-vulkan-fix
                 hyprbars
                 hyprexpo
                 hyprfocus
+                hyprtrails
+                hyprwinwrap
+                xtra-dispatchers
 }
 
 %if !%{defined build_for}
@@ -37,8 +41,8 @@ License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/hyprland-plugins
 Source:         %{url}/archive/%{commit0}/%{name}-%{commit0}.tar.gz
 
-#Hyprexpo fix
-Patch:          https://github.com/hyprwm/hyprland-plugins/pull/650.patch
+#Lua fix
+Patch:          https://github.com/hyprwm/hyprland-plugins/pull/649.patch
 
 BuildRequires:  gcc-c++
 BuildRequires:  cmake
