@@ -1,10 +1,10 @@
-%global commit          5807dae75a3e482b2c07c397c2d9b55102835f6e
+%global commit          ad53834484b0d4a01af6eb26992eb356aa639f9b
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 %global upstreamname    noctalia-shell
 
 Name:   	noctalia-shell-v5
 Version:	5.0.0
-Release:	0.13.git%{shortcommit}%{?dist}
+Release:	0.14.git%{shortcommit}%{?dist}
 Summary:	A lightweight Wayland shell and bar built directly on Wayland + OpenGL ES, with no Qt or GTK dependency.
 
 License:	MIT
@@ -49,6 +49,8 @@ Recommends:     wlsunset
 
 %prep
 %autosetup -n %{upstreamname}-%{commit} -p1
+# Manually insert commit hash
+sed -i "s/'unknown'/'%{shortcommit}'/g" meson.build
 
 %build
 %meson
