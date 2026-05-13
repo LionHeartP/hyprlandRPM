@@ -1,17 +1,15 @@
-%global commit          739349e60abd4d0c12270965a2a0af96ea5c49ce
+%global commit          aeecae70df122728e03b36b8d8f2645e8ed33275
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 %global upstreamname    noctalia-shell
 
 Name:   	noctalia-shell-v5
 Version:	5.0.0
-Release:	0.52.git%{shortcommit}%{?dist}
+Release:	0.53.git%{shortcommit}%{?dist}
 Summary:	A lightweight Wayland shell and bar built directly on Wayland + OpenGL ES, with no Qt or GTK dependency.
 
 License:	MIT
 URL:		https://github.com/noctalia-dev/%{upstreamname}
 Source0:	%{url}/archive/%{commit}/%{upstreamname}-%{commit}.tar.gz
-
-Patch:          hyprland-lua.patch
 
 BuildRequires:  meson
 BuildRequires:  gcc-c++
@@ -50,7 +48,7 @@ Recommends:     power-profiles-daemon
 %{summary}
 
 %prep
-%autosetup -n %{upstreamname}-%{commit} -p1
+%autosetup -n %{upstreamname}-%{commit}
 # Manually insert commit hash
 sed -i "s/'unknown'/'%{shortcommit}'/g" meson.build
 
