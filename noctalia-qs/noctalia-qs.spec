@@ -2,7 +2,7 @@
 
 Name:               noctalia-qs
 Version:            0.0.12
-Release:            %autorelease -b3
+Release:            %autorelease -b4
 Summary:            Fork of Quickshell - a flexible QtQuick based desktop shell toolkit
 
 License:            LGPL-3.0-only AND GPL-3.0-only
