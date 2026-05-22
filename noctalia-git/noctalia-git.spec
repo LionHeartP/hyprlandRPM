@@ -1,10 +1,10 @@
-%global commit          dba51479136bf83d9af47321b7fe02833ce1d1c7
+%global commit          c690e9aef5ec4ec2622ac096b185bbb8332ebd97
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 %global upstreamname    noctalia-shell
 
 Name:   	noctalia-git
 Version:	5.0.0
-Release:	0.86.git%{shortcommit}%{?dist}
+Release:	0.87.git%{shortcommit}%{?dist}
 Summary:	A lightweight Wayland shell and bar built directly on Wayland + OpenGL ES, with no Qt or GTK dependency.
 
 License:	MIT
@@ -22,6 +22,7 @@ BuildRequires:  pkgconfig(freetype2)
 BuildRequires:  pkgconfig(fontconfig)
 BuildRequires:  pkgconfig(glesv2)
 BuildRequires:  pkgconfig(glib-2.0)
+BuildRequires:  pkgconfig(harfbuzz)
 BuildRequires:  pkgconfig(jemalloc)
 BuildRequires:  pkgconfig(libcurl)
 BuildRequires:  pkgconfig(librsvg-2.0)
@@ -36,6 +37,7 @@ BuildRequires:  pkgconfig(xkbcommon)
 Provides:       desktop-notification-daemon
 Provides:       PolicyKit-authentication-agent
 
+Requires:       harfbuzz
 Requires:       hicolor-icon-theme
 Requires:       dejavu-sans-fonts
 Requires:       libwebp
