@@ -22,7 +22,6 @@ BuildRequires:  pkgconfig(freetype2)
 BuildRequires:  pkgconfig(fontconfig)
 BuildRequires:  pkgconfig(glesv2)
 BuildRequires:  pkgconfig(glib-2.0)
-BuildRequires:  pkgconfig(harfbuzz)
 BuildRequires:  pkgconfig(jemalloc)
 BuildRequires:  pkgconfig(libcurl)
 BuildRequires:  pkgconfig(librsvg-2.0)
@@ -37,7 +36,6 @@ BuildRequires:  pkgconfig(xkbcommon)
 Provides:       desktop-notification-daemon
 Provides:       PolicyKit-authentication-agent
 
-Requires:       harfbuzz
 Requires:       hicolor-icon-theme
 Requires:       dejavu-sans-fonts
 Requires:       libwebp
