@@ -1,6 +1,6 @@
 %global commit          d3e2593224e72ebb1de84b283dc70aa40a879433
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
-%global upstreamname    noctalia-shell
+%global upstreamname    noctalia
 
 Name:   	noctalia-git
 Version:	5.0.0
@@ -45,8 +45,6 @@ Requires:       libwebp
 Recommends:     ddcutil
 Recommends:     gpu-screen-recorder
 Recommends:     power-profiles-daemon
-
-Obsoletes:      noctalia-shell-v5 <= %{version}
 
 %description
 %{summary}

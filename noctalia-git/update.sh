@@ -2,7 +2,7 @@
 set -euxo pipefail
 
 SPEC_FILE="noctalia-git.spec"
-REPO="noctalia-dev/noctalia-shell"
+REPO="noctalia-dev/noctalia"
 BRANCH="main"
 ec=0
 
