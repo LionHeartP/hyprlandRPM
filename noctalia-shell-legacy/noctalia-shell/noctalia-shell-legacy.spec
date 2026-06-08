@@ -1,10 +1,10 @@
-Name:   	noctalia-shell
+Name:   	noctalia-shell-legacy
 Version:	4.7.7
-Release:	%autorelease
+Release:	%autorelease -b2
 Summary:	A sleek and minimal desktop shell thoughtfully crafted for Wayland, built with Quickshell.
 
 License:	MIT
-URL:		https://github.com/noctalia-dev/%{name}
+URL:		https://github.com/noctalia-dev/noctalia-shell
 Source0:	%{url}/releases/download/v%{version}/noctalia-v%{version}.tar.gz
 
 BuildArch:	noarch
@@ -12,7 +12,7 @@ BuildArch:	noarch
 Requires:	brightnessctl
 Requires:	dejavu-sans-fonts
 Requires:	ImageMagick
-Requires:	noctalia-qs
+Requires:	noctalia-qs-legacy
 Requires:	qt6-qtmultimedia
 
 Recommends:	cliphist
@@ -20,6 +20,8 @@ Recommends:	ddcutil
 Recommends:	gpu-screen-recorder
 Recommends:	power-profiles-daemon
 Recommends:	wlsunset
+
+Obsoletes:      noctalia-shell
 
 %description
 %{summary}

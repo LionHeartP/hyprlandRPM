@@ -1,8 +1,8 @@
 %bcond_with         asan
 
-Name:               noctalia-qs
+Name:               noctalia-qs-legacy
 Version:            0.0.12
-Release:            %autorelease -b4
+Release:            %autorelease -b5
 Summary:            Fork of Quickshell - a flexible QtQuick based desktop shell toolkit
 
 License:            LGPL-3.0-only AND GPL-3.0-only
@@ -36,6 +36,7 @@ BuildRequires:      libasan
 %endif
 
 Conflicts:          quickshell
+Obsoletes:          noctalia-qs <= %{version}
 Provides:           desktop-notification-daemon
 Provides:           PolicyKit-authentication-agent
 

@@ -3,7 +3,7 @@ set -euxo pipefail
 
 SPEC_FILE="noctalia-git.spec"
 REPO="noctalia-dev/noctalia-shell"
-BRANCH="v5"
+BRANCH="main"
 ec=0
 
 oldCommit="$(grep "%global commit " "$SPEC_FILE" | awk '{print $3}')"
