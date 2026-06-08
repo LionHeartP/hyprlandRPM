@@ -1,16 +1,16 @@
 Name:           noctalia-hyprland-meta
-Version:        0.1
+Version:        0.2
 Release:        1%{?dist}
 Summary:        Meta-package to kickstart noctalia-shell on Hyprland
 BuildArch:      noarch
 
 License:        MIT
 
-Source0:         hyprland.conf
+Source0:        hyprland.lua
 
 Requires:       hyprland
 Requires:	hyprland-guiutils
-Requires:       noctalia-shell
+Requires:       noctalia-git
 
 %description
 A meta-package that installs hyprland and noctalia-shell. It provides a 
@@ -28,18 +28,21 @@ install -pm 0644 %{SOURCE0} %{buildroot}/etc/skel/.config/hypr/
 %post
 if [ -n "$SUDO_USER" ]; then
     USER_HOME=$(getent passwd "$SUDO_USER" | cut -d: -f6)
-    USER_CONF="$USER_HOME/.config/hypr/hyprland.conf"
+    USER_CONF="$USER_HOME/.config/hypr/hyprland.lua"
     if [ ! -f "$USER_CONF" ]; then
         mkdir -p "$(dirname "$USER_CONF")"
-        cp /etc/skel/.config/hypr/hyprland.conf "$USER_CONF"
+        cp /etc/skel/.config/hypr/hyprland.lua "$USER_CONF"
         chown -R "$SUDO_USER:" "$(dirname "$USER_CONF")"
     fi
 fi
 
 %files
 %dir /etc/skel/.config/hypr
-/etc/skel/.config/hypr/hyprland.conf
+/etc/skel/.config/hypr/hyprland.lua
 
 %changelog
+* Mon Jun 08 2026 LionHeartP <LionHeartP@proton.me> - 0.2-1
+- Migrate to noctalia v5 and hyprland lua config
+
 * Sun Mar 29 2026 LionHeartP <LionHeartP@proton.me> - 0.1-1
 - Initial release
