@@ -1,4 +1,4 @@
-%global upstreamname    noctalia
+%global upstreamname    noctalia-qs
 %bcond_with         asan
 
 Name:               noctalia-qs-legacy
@@ -45,7 +45,7 @@ Provides:           PolicyKit-authentication-agent
 noctalia-qs is a custom fork of Quickshell — a flexible QtQuick-based desktop shell toolkit for Wayland. It serves as the shell framework powering Noctalia Shell.
 
 %prep
-%autosetup
+%autosetup -n %{upstreamname}-%{version}
 
 %build
 %cmake  -GNinja \
