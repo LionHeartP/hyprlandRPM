@@ -42,6 +42,7 @@ Requires:       greetd
 %autosetup -n %{name}-%{commit}
 
 %build
+export LDFLAGS="%{__global_ldflags} -Wl,-z,notext"
 %meson
 %meson_build
 
