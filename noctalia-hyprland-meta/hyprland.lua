@@ -297,6 +297,13 @@ hl.bind(mainMod .. " + CTRL + F", hl.dsp.window.fullscreen({ mode = "maximized",
 -- Fullscreen - Window takes up the entire screen.
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
 
+-- Screenshot a window
+hl.bind(mainMod .. " + PRINT", hl.dsp.exec_cmd("hyprshot -m window"))
+-- Screenshot a monitor
+hl.bind("PRINT", hl.dsp.exec_cmd("hyprshot -m output"))
+-- Screenshot a region
+hl.bind(mainMod .. " + SHIFT + PRINT", hl.dsp.exec_cmd("hyprshot -m region"))
+
 -- Example special workspace (scratchpad)
 hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special("magic"))
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
