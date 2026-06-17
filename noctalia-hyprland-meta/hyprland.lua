@@ -274,9 +274,28 @@ hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down" }))
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
 for i = 1, 10 do
     local key = i % 10 -- 10 maps to key 0
-    hl.bind(mainMod .. " + " .. key,             hl.dsp.focus({ workspace = i}))
-    hl.bind(mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
+    hl.bind(mainMod .. " + " .. key, function()
+        local mon = hl.get_active_monitor()
+        if mon.active_workspace.id == i then
+            -- If trying to switch to current workspace, move to previous workspace
+            -- This is useful when alternating between two different workspaces
+            hl.dispatch(hl.dsp.focus({ workspace = "previous" }))
+        else
+            -- Otherwise move to desired workspace 
+            hl.dispatch(hl.dsp.focus({ workspace = i }))
+        end
+    end)
+
+    -- Move window to a different workspace and switch to that workspace
+    hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
+    -- Move window to a different workspace but keep current workspace
+    hl.bind(mainMod .. " + CTRL + " .. key, hl.dsp.window.move({ workspace = i, follow = false }))
 end
+
+-- Fullscreen - Window takes up the entire working space, keeping the margins.
+hl.bind(mainMod .. " + CTRL + F", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
+-- Fullscreen - Window takes up the entire screen.
+hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
 
 -- Example special workspace (scratchpad)
 hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special("magic"))
