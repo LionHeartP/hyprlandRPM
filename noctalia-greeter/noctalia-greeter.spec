@@ -1,9 +1,9 @@
-%global commit          28e26c0bd96c18fb707381ae98c6cf2910bb580b
+%global commit          57fc7a76a5a81e744df76f6690ab690db0990632
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 Name:   	noctalia-greeter
 Version:	1.0.0
-Release:	0.15.git%{shortcommit}%{?dist}
+Release:	0.16.git%{shortcommit}%{?dist}
 Summary:	A minimal login greeter for greetd that matches the look and feel of Noctalia Shell.
 
 License:	MIT
@@ -46,20 +46,19 @@ Requires:       wlroots >= 0.20
 
 %install
 %meson_install
-# No third party licenses implemented yet
-#install -d %{buildroot}%{_licensedir}/%{name}/third_party
-#find third_party -type f \( -name "LICENSE*" -o -name "COPYING*" -o -name "NOTICE*" \) | while read -r file; do
+install -d %{buildroot}%{_licensedir}/%{name}/third_party
+find third_party -type f \( -name "LICENSE*" -o -name "COPYING*" -o -name "NOTICE*" \) | while read -r file; do
     # Create the destination subdirectory
-#    dest_dir="%{buildroot}%{_licensedir}/%{name}/$(dirname "$file")"
-#    install -d "$dest_dir"
-#    # Copy the file to its specific subfolder
-#    install -p -m 0644 "$file" "$dest_dir/"
-#done
+    dest_dir="%{buildroot}%{_licensedir}/%{name}/$(dirname "$file")"
+    install -d "$dest_dir"
+    # Copy the file to its specific subfolder
+    install -p -m 0644 "$file" "$dest_dir/"
+done
 
 %files
 %doc README.md
 %license LICENSE
-#%%{_licensedir}/%%{name}/third_party/
+%{_licensedir}/%{name}/third_party/
 %{_bindir}/%{name}
 %{_bindir}/%{name}-apply-appearance
 %{_bindir}/%{name}-compositor
