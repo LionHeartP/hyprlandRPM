@@ -14,6 +14,7 @@ Source0:	%{url}/archive/%{commit}/%{upstreamname}-%{commit}.tar.gz
 BuildRequires:  meson
 BuildRequires:  gcc-c++
 BuildRequires:  git
+BuildRequires:  desktop-file-utils
 BuildRequires:  pipewire-devel
 BuildRequires:  sdbus-cpp-devel
 BuildRequires:  pkgconfig(cairo)
@@ -69,12 +70,17 @@ find third_party -type f \( -name "LICENSE*" -o -name "COPYING*" -o -name "NOTIC
     install -p -m 0644 "$file" "$dest_dir/"
 done
 
+%check
+desktop-file-validate %{buildroot}%{_datadir}/applications/dev.noctalia.Noctalia.desktop
+
 %files
 %doc README.md
 %license LICENSE
 %{_licensedir}/%{name}/third_party/
 %{_bindir}/noctalia
 %{_datadir}/noctalia/
+%{_datadir}/applications/dev.noctalia.Noctalia.desktop
+%{_datadir}/icons/hicolor/scalable/apps/noctalia.svg
 
 %changelog
 %autochangelog
