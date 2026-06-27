@@ -193,6 +193,11 @@ Requires:       pkgconfig(xkbcommon)
 %autosetup -n %{?bumpver:Hyprland-%{hyprland_commit}} %{!?bumpver:hyprland-source} -N
 # Fedora names it lua.pc . The correct version is ensured in the BuildRequires section
 sed -i 's/lua55/lua/g' CMakeLists.txt
+%if 0%{?fedora} == 43
+sed -i '/return (.* || std::ranges::starts_with(str_view, prefixes));/c\
+    auto check = [&](auto prefix) { return std::string(str_view.begin(), str_view.end()).starts_with(prefix); };\
+    return (... || check(prefixes));' src/helpers/MiscFunctions.cpp
+%endif
 %if 0%{?bumpver}
 tar -xf %{SOURCE2} -C subprojects/hyprland-protocols --strip=1
 tar -xf %{SOURCE3} -C subprojects/udis86 --strip=1
