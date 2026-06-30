@@ -1,10 +1,10 @@
-%global commit          8fa34ffb94dcba8b8fddda446c8af496cec6cdfc
+%global commit          195c43f9561750b6fe03f46dcd5fb3bd13a2e56f
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 %global upstreamname    noctalia
 
 Name:   	noctalia-git
 Version:	5.0.0
-Release:	0.231.git%{shortcommit}%{?dist}
+Release:	0.232.git%{shortcommit}%{?dist}
 Summary:	A lightweight Wayland shell and bar built directly on Wayland + OpenGL ES, with no Qt or GTK dependency.
 
 License:	MIT
@@ -15,6 +15,7 @@ BuildRequires:  meson
 BuildRequires:  gcc-c++
 BuildRequires:  git
 BuildRequires:  desktop-file-utils
+BuildRequires:  tomlplusplus-devel
 BuildRequires:  pipewire-devel
 BuildRequires:  sdbus-cpp-devel
 BuildRequires:  pkgconfig(cairo)
@@ -56,7 +57,8 @@ Recommends:     power-profiles-daemon
 sed -i "s/'unknown'/'%{shortcommit}'/g" meson.build
 
 %build
-%meson
+%meson \
+	 -Dsystem_tomlplusplus=true
 %meson_build
 
 %install
