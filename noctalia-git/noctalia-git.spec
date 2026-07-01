@@ -4,7 +4,7 @@
 
 Name:   	noctalia-git
 Version:	5.0.0
-Release:	0.238.git%{shortcommit}%{?dist}
+Release:	0.237.git%{shortcommit}%{?dist}
 Summary:	A lightweight Wayland shell and bar built directly on Wayland + OpenGL ES, with no Qt or GTK dependency.
 
 License:	MIT
@@ -65,7 +65,7 @@ rm -r third_party/md4c
 %build
 %meson \
 	 -Dsystem_tomlplusplus=true \
-	 -Dsystem_md4c \
+	 -Dsystem_md4c=true \
 %meson_build
 
 %install
