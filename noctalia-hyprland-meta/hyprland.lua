@@ -210,6 +210,16 @@ hl.config({
     },
 })
 
+-----------------
+----  BINDS  ----
+-----------------
+
+hl.config({
+    binds = {
+        workspace_back_and_forth = true
+    },
+})
+
 
 ---------------
 ---- INPUT ----
@@ -270,21 +280,11 @@ hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + up",    hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down" }))
 
--- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
 for i = 1, 10 do
     local key = i % 10 -- 10 maps to key 0
-    hl.bind(mainMod .. " + " .. key, function()
-        local mon = hl.get_active_monitor()
-        if mon.active_workspace.id == i then
-            -- If trying to switch to current workspace, move to previous workspace
-            -- This is useful when alternating between two different workspaces
-            hl.dispatch(hl.dsp.focus({ workspace = "previous" }))
-        else
-            -- Otherwise move to desired workspace 
-            hl.dispatch(hl.dsp.focus({ workspace = i }))
-        end
-    end)
+    -- Switch workspaces with mainMod + [0-9]
+    hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
 
     -- Move window to a different workspace and switch to that workspace
     hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
