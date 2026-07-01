@@ -9,6 +9,8 @@
 -- Create your files separately and then require them like this:
 -- require("myColors")
 
+-- noctalia ipc
+local ipc = "noctalia msg "
 
 ------------------
 ---- MONITORS ----
@@ -30,7 +32,6 @@ hl.monitor({
 -- Set programs that you use
 local terminal    = "kitty"
 local fileManager = "dolphin"
-local menu        = "hyprlauncher"
 
 
 -------------------
@@ -210,6 +211,16 @@ hl.config({
     },
 })
 
+-----------------
+----  BINDS  ----
+-----------------
+
+hl.config({
+    binds = {
+        workspace_back_and_forth = true
+    },
+})
+
 
 ---------------
 ---- INPUT ----
@@ -255,12 +266,15 @@ local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
 hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
+-- Kill the process owning the window with a SIGKILL
+hl.bind(mainMod .. " + SHIFT + C", hl.dsp.window.kill())
+-- Send a graceful request to close the window
 local closeWindowBind = hl.bind(mainMod .. " + C", hl.dsp.window.close())
 -- closeWindowBind:set_enabled(false)
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
+hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(ipc .. "panel-toggle launcher"))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
 
@@ -270,25 +284,14 @@ hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + up",    hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down" }))
 
--- Switch workspaces with mainMod + [0-9]
--- Move active window to a workspace with mainMod + SHIFT + [0-9]
 for i = 1, 10 do
     local key = i % 10 -- 10 maps to key 0
-    hl.bind(mainMod .. " + " .. key, function()
-        local mon = hl.get_active_monitor()
-        if mon.active_workspace.id == i then
-            -- If trying to switch to current workspace, move to previous workspace
-            -- This is useful when alternating between two different workspaces
-            hl.dispatch(hl.dsp.focus({ workspace = "previous" }))
-        else
-            -- Otherwise move to desired workspace 
-            hl.dispatch(hl.dsp.focus({ workspace = i }))
-        end
-    end)
+    -- Switch workspaces with mainMod + [0-9]
+    hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
 
-    -- Move window to a different workspace and switch to that workspace
+    -- Move window to a different workspace and switch to that workspace with mainMod + SHIFT + [0-9]
     hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
-    -- Move window to a different workspace but keep current workspace
+    -- Move window to a different workspace but keep current workspace with mainMod + CTRL + [0-9]
     hl.bind(mainMod .. " + CTRL + " .. key, hl.dsp.window.move({ workspace = i, follow = false }))
 end
 
@@ -296,6 +299,11 @@ end
 hl.bind(mainMod .. " + CTRL + F", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
 -- Fullscreen - Window takes up the entire screen.
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
+
+-- Screenshot a monitor
+hl.bind("PRINT", hl.dsp.exec_cmd(ipc .. "screenshot-fullscreen pick"))
+-- Screenshot a region
+hl.bind(mainMod .. " +  PRINT", hl.dsp.exec_cmd(ipc .. "screenshot-region"))
 
 -- Example special workspace (scratchpad)
 hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special("magic"))
