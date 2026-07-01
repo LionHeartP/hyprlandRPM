@@ -9,6 +9,8 @@
 -- Create your files separately and then require them like this:
 -- require("myColors")
 
+-- noctalia ipc
+local ipc = "noctalia msg "
 
 ------------------
 ---- MONITORS ----
@@ -295,6 +297,11 @@ end
 hl.bind(mainMod .. " + CTRL + F", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
 -- Fullscreen - Window takes up the entire screen.
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
+
+-- Screenshot a monitor
+hl.bind("PRINT", hl.dsp.exec_cmd(ipc .. "screenshot-fullscreen pick"))
+-- Screenshot a region
+hl.bind(mainMod .. " +  PRINT", hl.dsp.exec_cmd(ipc .. "screenshot-region"))
 
 -- Example special workspace (scratchpad)
 hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special("magic"))
