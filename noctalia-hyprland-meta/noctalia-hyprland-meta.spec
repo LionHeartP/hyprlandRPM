@@ -41,6 +41,9 @@ fi
 /etc/skel/.config/hypr/hyprland.lua
 
 %changelog
+* Wed Jul 01 2026 LionHeartP <LionHeartP@proton.me> - 0.2-4
+- Update lua config
+
 * Mon Jun 08 2026 LionHeartP <LionHeartP@proton.me> - 0.2-2
 - Fix typo on lua config
 
