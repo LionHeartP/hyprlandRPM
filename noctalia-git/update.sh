@@ -10,7 +10,7 @@ oldCommit="$(grep "%global commit " "$SPEC_FILE" | awk '{print $3}')"
 newCommit="$(curl -s -H "Accept: application/vnd.github.VERSION.sha" "https://api.github.com/repos/$REPO/commits/$BRANCH")"
 
 oldVersion="$(rpmspec -q --qf "%{version}\n" "$SPEC_FILE" | head -1)"
-newTag="$(curl -s "https://api.github.com/repos/$REPO/tags" | jq -r '.[0].name' | sed 's/^v//')"
+newTag="$(curl -s "https://api.github.com/repos/$REPO/tags" | jq -r '.[0].name' | sed -e 's/^v//' -e 's/-/~/g')"
 
 rpmdev-vercmp "$oldVersion" "$newTag" || ec=$?
 
