@@ -1,9 +1,9 @@
-%global commit          499e38ec25b574c68d96938b50b4b86712089304
+%global commit          e12f8f850ba34940ffcdb6b30ffa58a18b4eb218
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 Name:   	noctalia-greeter
 Version:	1.0.0
-Release:	0.24.git%{shortcommit}%{?dist}
+Release:	0.25.git%{shortcommit}%{?dist}
 Summary:	A minimal login greeter for greetd that matches the look and feel of Noctalia Shell.
 
 License:	MIT
