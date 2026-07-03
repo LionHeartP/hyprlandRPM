@@ -22,9 +22,9 @@ fi
 if [ "$ec" -eq 12 ]; then
     echo "Newer tag detected: $newTag. Resetting release bump."
     sed -i "s/^Version:.*/Version:	$newTag/" "$SPEC_FILE"
-    sed -i "s/^Release:.*/Release:	0.1.%{build_timestamp}git%{shortcommit}%{?dist}/" "$SPEC_FILE"
+    sed -i "s/^Release:.*/Release:	1.git%{shortcommit}%{?dist}/" "$SPEC_FILE"
 else
-    perl -pe 's/(?<=Release:\t0\.)(\d+)/$1 + 1/e' -i "$SPEC_FILE"
+    perl -pe 's/(?<=Release:[\t ]*)(\d+)(?=\.git)/$1 + 1/e' -i "$SPEC_FILE"
 fi
 
 newTimestamp="$(date +"%Y%m%d")"

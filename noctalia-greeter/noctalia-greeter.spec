@@ -3,7 +3,7 @@
 
 Name:   	noctalia-greeter
 Version:	1.0.0
-Release:	0.25.git%{shortcommit}%{?dist}
+Release:	1.git%{shortcommit}%{?dist}
 Summary:	A minimal login greeter for greetd that matches the look and feel of Noctalia Shell.
 
 License:	MIT
