@@ -47,6 +47,7 @@ BuildRequires:  pkgconfig(libnl-3.0)
 BuildRequires:  pkgconfig(libnl-genl-3.0)
 BuildRequires:  pkgconfig(libpulse)
 BuildRequires:  pkgconfig(libudev)
+BuildRequires:  pkgconfig(mm-glib)
 BuildRequires:  pkgconfig(playerctl)
 BuildRequires:  pkgconfig(sigc++-2.0)
 BuildRequires:  pkgconfig(spdlog) >= 1.10.0
