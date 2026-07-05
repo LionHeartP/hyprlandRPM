@@ -50,6 +50,8 @@ Recommends:     ddcutil
 Recommends:     gpu-screen-recorder
 Recommends:     power-profiles-daemon
 
+Conflicts:      noctalia
+
 %description
 %{summary}
 
