@@ -1,6 +1,6 @@
 Name:           noctalia-hyprland-meta
 Version:        0.2
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Meta-package to kickstart noctalia-shell on Hyprland
 BuildArch:      noarch
 
@@ -10,7 +10,7 @@ Source0:        hyprland.lua
 
 Requires:       hyprland
 Requires:	    hyprland-guiutils
-Requires:       noctalia-git
+Requires:       (noctalia or noctalia-git)
 
 %description
 A meta-package that installs hyprland and noctalia-shell. It provides a 
