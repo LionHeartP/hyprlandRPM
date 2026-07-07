@@ -15,11 +15,13 @@ BuildRequires:  meson
 BuildRequires:  gcc-c++
 BuildRequires:  git
 BuildRequires:  desktop-file-utils
+BuildRequires:  json-devel
 BuildRequires:  md4c-devel
-BuildRequires:  tomlplusplus-devel
 BuildRequires:  pipewire-devel
-BuildRequires:  wireplumber-devel
 BuildRequires:  sdbus-cpp-devel
+BuildRequires:  stb-devel
+BuildRequires:  tomlplusplus-devel
+BuildRequires:  wireplumber-devel
 BuildRequires:  pkgconfig(cairo)
 BuildRequires:  pkgconfig(egl)
 BuildRequires:  pkgconfig(freetype2)
@@ -61,13 +63,17 @@ Conflicts:      noctalia
 sed -i "s/'unknown'/'%{shortcommit}'/g" meson.build
 
 # Remove bundled libs that we have system copies of
-rm -r third_party/tomlplusplus
 rm -r third_party/md4c
+rm -r third_party/nlohmann
+rm -r third_party/stb
+rm -r third_party/tomlplusplus
 
 %build
 %meson \
-	 -Dsystem_tomlplusplus=true \
+	 -Dstb_headers=/usr/include/stb \
 	 -Dsystem_md4c=true \
+	 -Dsystem_nlohmann_json=true \
+	 -Dsystem_tomlplusplus=true \
 %meson_build
 
 %install
