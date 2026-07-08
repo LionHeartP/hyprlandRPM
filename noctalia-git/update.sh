@@ -10,7 +10,11 @@ oldCommit="$(grep "%global commit " "$SPEC_FILE" | awk '{print $3}')"
 newCommit="$(curl -s -H "Accept: application/vnd.github.VERSION.sha" "https://api.github.com/repos/$REPO/commits/$BRANCH")"
 
 oldVersion="$(rpmspec -q --qf "%{version}\n" "$SPEC_FILE" | head -1)"
-newTag="$(curl -s "https://api.github.com/repos/$REPO/tags" | jq -r '.[0].name' | sed -e 's/^v//' -e 's/-/~/g')"
+oldVersionBase="$(echo "$oldVersion" | sed 's/\^.*//')"
+newTag="$(curl -s "https://api.github.com/repos/$REPO/tags" | jq -r '.[0].name' | sed -e 's/^v//' -e 's/-/~/g' -e 's/null//')"
+if [ -z "$newTag" ]; then
+    newTag="$oldVersionBase"
+fi
 
 rpmdev-vercmp "$oldVersion" "$newTag" || ec=$?
 
@@ -20,18 +24,17 @@ if [ "$oldCommit" == "$newCommit" ] && [ "$ec" -ne 12 ]; then
 fi
 
 if [ "$ec" -eq 12 ]; then
-    echo "Newer tag detected: $newTag. Resetting release bump."
-    sed -i "s/^Version:.*/Version:	$newTag/" "$SPEC_FILE"
-    sed -i "s/^Release:.*/Release:	0.1.git%{shortcommit}%{?dist}/" "$SPEC_FILE"
+    echo "Newer tag detected: $newTag. Resetting snapshot counter."
+    sed -i "s/^Version:.*/Version:	$newTag^1.%{shortcommit}/" "$SPEC_FILE"
 else
-    perl -pe 's/(?<=Release:\t0\.)(\d+)/$1 + 1/e' -i "$SPEC_FILE"
+    echo "Same version base, upgrading snapshot counter."
+    perl -pe '/^Version:/ && s/\^(\d+)/"^" . ($1 + 1)/e' -i "$SPEC_FILE"
 fi
 
-newTimestamp="$(date +"%Y%m%d")"
 sed -i "s/^%global commit.*/%global commit          $newCommit/" "$SPEC_FILE"
 
 git diff --quiet "$SPEC_FILE" || \
 {
-    git commit -am "up rev noctalia-git-${newTag:-$oldVersion}+${newCommit:0:7}"
+    git commit -am "up rev noctalia-git-${newTag:-$oldVersionBase}+${newCommit:0:7}"
     git push
 }
