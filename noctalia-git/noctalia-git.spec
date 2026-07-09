@@ -1,9 +1,9 @@
-%global commit          14ec268fc5833fa34e4b1e25ffc8762545bbdf5f
+%global commit          dea1d264db7d6c0deb54b8fa4d9809f967fcf719
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 %global upstreamname    noctalia
 
 Name:   	noctalia-git
-Version:	5.0.0^260.%{shortcommit}
+Version:	5.0.0^261.%{shortcommit}
 Release:	1%{?dist}
 Summary:	A lightweight Wayland shell and bar built directly on Wayland + OpenGL ES, with no Qt or GTK dependency.
 
@@ -62,18 +62,8 @@ Conflicts:      noctalia
 # Manually insert commit hash
 sed -i "s/'unknown'/'%{shortcommit}'/g" meson.build
 
-# Remove bundled libs that we have system copies of
-rm -r third_party/md4c
-rm -r third_party/nlohmann
-rm -r third_party/stb
-rm -r third_party/tomlplusplus
-
 %build
-%meson \
-	 -Dstb_headers=/usr/include/stb \
-	 -Dsystem_md4c=true \
-	 -Dsystem_nlohmann_json=true \
-	 -Dsystem_tomlplusplus=true \
+%meson
 %meson_build
 
 %install
