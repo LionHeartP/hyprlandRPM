@@ -63,7 +63,9 @@ Conflicts:      noctalia
 sed -i "s/'unknown'/'%{shortcommit}'/g" meson.build
 
 %build
-%meson
+%meson \
+  -Dbuildtype=release \
+  -Db_lto=true
 %meson_build
 
 %install
