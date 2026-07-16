@@ -64,7 +64,7 @@ sed -i "s/'unknown'/'%{shortcommit}'/g" meson.build
 
 %build
 %meson \
-  -Dbuildtype=release \
+  --buildtype=release \
   -Db_lto=true
 %meson_build
 
