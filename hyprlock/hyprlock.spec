@@ -8,6 +8,7 @@ License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/hyprlock
 Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 Source:         https://github.com/Kistler-Group/sdbus-cpp/archive/v%{sdbus_version}/sdbus-%{sdbus_version}.tar.gz
+Patch:          https://github.com/hyprwm/hyprlock/commit/c72fd24ca70bf726bbb58609b37545b24dcc9810.patch
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}
