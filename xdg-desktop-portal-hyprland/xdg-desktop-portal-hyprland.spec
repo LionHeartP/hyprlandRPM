@@ -10,6 +10,7 @@ License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/xdg-desktop-portal-hyprland
 Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 Source:         https://github.com/Kistler-Group/sdbus-cpp/archive/v%{sdbus_version}/sdbus-%{sdbus_version}.tar.gz
+Patch:          https://github.com/hyprwm/xdg-desktop-portal-hyprland/commit/882ad01e195ce201b07c618bbee44a0cad8b9e5a.patch
 
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
