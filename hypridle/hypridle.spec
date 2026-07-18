@@ -1,4 +1,4 @@
-%global sdbus_version 2.1.0
+%global sdbus_version 2.3.1
 
 Name:           hypridle
 Version:        0.1.7
