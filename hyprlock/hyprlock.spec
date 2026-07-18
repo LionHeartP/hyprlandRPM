@@ -1,13 +1,13 @@
 %global sdbus_version 2.3.1
 
 Name:           hyprlock
-Version:        0.9.5
-Release:        %autorelease -b3
+Version:        0.9.6
+Release:        %autorelease
 Summary:        Hyprland's GPU-accelerated screen locking utility
 License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/hyprlock
 Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
-Source:         https://github.com/Kistler-Group/sdbus-cpp/archive/v%{sdbus_version}/sdbus-%{sdbus_version}.tar.gz
+Source:         {sdbus_version}/sdbus-%{sdbus_version}.tar.gz
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}
