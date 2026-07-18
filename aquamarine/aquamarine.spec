@@ -5,6 +5,8 @@ Summary:        A very light linux rendering backend library
 License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/aquamarine
 Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
+Patch:          https://github.com/hyprwm/aquamarine/commit/c49d9c4ade35561ed420e6f19ed1c1f1b3ab0ea5.patch
+Patch:          https://github.com/hyprwm/aquamarine/commit/6d6e2384f381def4ea4ea81543cba4bbdac72457.patch
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}
@@ -36,7 +38,7 @@ Requires:       %{name}%{?_isa} = %{version}-%{release}
 Development files for %{name}.
 
 %prep
-%autosetup
+%autosetup -p1
 
 %build
 %cmake -DCMAKE_BUILD_TYPE=Release
