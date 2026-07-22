@@ -13,8 +13,11 @@ Source0:	%{url}/archive/%{commit}/%{name}-%{commit}.tar.gz
 BuildRequires:  dbus
 BuildRequires:  gcc-c++
 BuildRequires:  greetd
+BuildRequires:  json-devel
 BuildRequires:  just
 BuildRequires:  meson
+BuildRequires:  stb-devel
+BuildRequires:  tomlplusplus-devel
 BuildRequires:  pkgconfig(cairo)
 BuildRequires:  pkgconfig(egl)
 BuildRequires:  pkgconfig(fontconfig)
