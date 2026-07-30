@@ -1,9 +1,9 @@
-%global commit          f838b32ab44408ebe2d8ad45d773eafcc30c6f8d
+%global commit          83e05fa660c5b3938065432607186345e0f0d960
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 %global upstreamname    noctalia
 
 Name:   	noctalia-git
-Version:	5.0.0^334.%{shortcommit}
+Version:	5.0.0^335.%{shortcommit}
 Release:	1%{?dist}
 Summary:	A sleek, customizable desktop shell crafted for Wayland.
 
@@ -31,6 +31,7 @@ BuildRequires:  pkgconfig(glib-2.0)
 BuildRequires:  pkgconfig(jemalloc)
 BuildRequires:  pkgconfig(libcurl)
 BuildRequires:  pkgconfig(libjxl_cms)
+BuildRequires:  pkgconfig(libical)
 BuildRequires:  pkgconfig(libqalculate)  
 BuildRequires:  pkgconfig(librsvg-2.0)
 BuildRequires:  pkgconfig(libsecret-1)
