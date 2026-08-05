@@ -57,6 +57,7 @@ hyprdeps = {
     "pkgconfig(hyprwayland-scanner)",
     "pkgconfig(hyprwire)",
     "pkgconfig(lcms2)",
+    "pkgconfig(libcanberra)",
     "pkgconfig(libdisplay-info)",
     "pkgconfig(libdrm)",
     "pkgconfig(libeis-1.0)",
