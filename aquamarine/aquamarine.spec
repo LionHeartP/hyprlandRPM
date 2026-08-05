@@ -6,6 +6,7 @@ License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/aquamarine
 Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
+Patch:          https://github.com/hyprwm/aquamarine/commit/fc39af0ccec9171aec8185eaea8afb71a46eff90.patch
 Patch:          https://github.com/hyprwm/aquamarine/commit/cf454160f2e9432263e2a2a531ce546a07033d01.patch
 Patch:          https://github.com/hyprwm/aquamarine/commit/5a9a6da9dd31efd3c4141abf034c74a5e00a0fd9.patch
 
