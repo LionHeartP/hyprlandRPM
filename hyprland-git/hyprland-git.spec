@@ -197,6 +197,7 @@ Requires:       pkgconfig(xkbcommon)
 # Fedora names it lua.pc . The correct version is ensured in the BuildRequires section
 sed -i 's/lua55/lua/g' CMakeLists.txt
 %if 0%{?fedora} == 43
+sed -i 's/\.subview(/ .substr(/g' src/ipc/s1/S1.cpp
 sed -i '/return (.* || std::ranges::starts_with(str_view, prefixes));/c\
     auto check = [&](auto prefix) { return std::string(str_view.begin(), str_view.end()).starts_with(prefix); };\
     return (... || check(prefixes));' src/helpers/MiscFunctions.cpp
