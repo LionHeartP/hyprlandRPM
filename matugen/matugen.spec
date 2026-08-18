@@ -3,7 +3,7 @@
 %global __brp_mangle_shebangs_exclude_from ^/usr/src/debug/.*$
 
 Name:           matugen
-Version:        4.1.0
+Version:        4.2.0
 Release:        %autorelease
 Summary:        A material you color generation tool with templates
 License:        GPL-2.0-only
