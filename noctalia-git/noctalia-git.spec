@@ -62,6 +62,36 @@ Conflicts:      noctalia
 %description
 %{summary}
 
+%package bash-completion
+Summary:        Bash completion for %{upstreamname}
+BuildArch:      noarch
+Requires:       %{name} = %{version}-%{release}
+Requires:       bash-completion
+Supplements:    (%{name} = %{version}-%{release} and bash-completion)
+
+%description bash-completion
+Bash command-line completion support for %{upstreamname}.
+
+%package zsh-completion
+Summary:        Zsh completion for %{upstreamname}
+BuildArch:      noarch
+Requires:       %{name} = %{version}-%{release}
+Requires:       zsh
+Supplements:    (%{name} = %{version}-%{release} and zsh)
+
+%description zsh-completion
+Zsh command-line completion support for %{upstreamname}.
+
+%package fish-completion
+Summary:        Fish completion for %{upstreamname}
+BuildArch:      noarch
+Requires:       %{name} = %{version}-%{release}
+Requires:       fish
+Supplements:    (%{name} = %{version}-%{release} and fish)
+
+%description fish-completion
+Fish command-line completion support for %{upstreamname}.
+
 %prep
 %autosetup -n %{upstreamname}-%{commit}
 # Manually insert commit hash
@@ -84,6 +114,15 @@ find third_party -type f \( -name "LICENSE*" -o -name "COPYING*" -o -name "NOTIC
     install -p -m 0644 "$file" "$dest_dir/"
 done
 
+# Generate and install shell completions
+install -d %{buildroot}%{_datadir}/bash-completion/completions
+install -d %{buildroot}%{_datadir}/zsh/site-functions
+install -d %{buildroot}%{_datadir}/fish/vendor_completions.d
+
+%{_vpath_builddir}/noctalia completions bash > %{buildroot}%{_datadir}/bash-completion/completions/noctalia
+%{_vpath_builddir}/noctalia completions zsh  > %{buildroot}%{_datadir}/zsh/site-functions/_noctalia
+%{_vpath_builddir}/noctalia completions fish > %{buildroot}%{_datadir}/fish/vendor_completions.d/noctalia.fish
+
 %check
 desktop-file-validate %{buildroot}%{_datadir}/applications/dev.noctalia.Noctalia.desktop
 
@@ -95,6 +134,15 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/dev.noctalia.Noctalia
 %{_datadir}/noctalia/
 %{_datadir}/applications/dev.noctalia.Noctalia.desktop
 %{_datadir}/icons/hicolor/scalable/apps/noctalia.svg
+
+%files bash-completion
+%{_datadir}/bash-completion/completions/noctalia
+
+%files zsh-completion
+%{_datadir}/zsh/site-functions/_noctalia
+
+%files fish-completion
+%{_datadir}/fish/vendor_completions.d/noctalia.fish
 
 %changelog
 %autochangelog
