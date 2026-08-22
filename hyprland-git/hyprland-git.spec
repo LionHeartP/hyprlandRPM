@@ -1,4 +1,4 @@
-%global hyprland_commit bb415864a5f18ada6fe617bfe8b1e903f757a320
+%global hyprland_commit 0251f09fd15058a10dc94265f3e5eea5c419927a
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
 %global bumpver 22
 %global commits_count 7756
@@ -245,6 +245,9 @@ source /usr/lib/gcc-toolset/15-env.source
 %cmake_install
 install -Dpm644 %{SOURCE4} -t %{buildroot}%{_rpmconfigdir}/macros.d
 
+# Move user unit file from lib64 to lib as per Fedora guidelines
+mkdir -p %{buildroot}%{_prefix}/lib/systemd/user
+mv %{buildroot}%{_libdir}/systemd/user/* %{buildroot}%{_prefix}/lib/systemd/user/
 
 %files
 %license LICENSE LICENSE-udis86 LICENSE-hyprland-protocols
@@ -255,6 +258,7 @@ install -Dpm644 %{SOURCE4} -t %{buildroot}%{_rpmconfigdir}/macros.d
 %{_datadir}/hypr/
 %{_datadir}/wayland-sessions/hyprland.desktop
 %{_datadir}/xdg-desktop-portal/hyprland-portals.conf
+%{_userunitdir}/hyprland-session.target
 %{_mandir}/man1/hyprctl.1*
 %{_mandir}/man1/Hyprland.1*
 %{bash_completions_dir}/hypr*
