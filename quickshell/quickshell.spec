@@ -1,7 +1,7 @@
-%global commit 15ea8e6f44a3783ebc4172a7b08ba02ad175dcde
+%global commit 9f59d0a05dff3865cf5bdff19309627214e18363
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
-%global build_timestamp %(date +"20260825")
-%global rel_build 3.git.%{build_timestamp}.%{shortcommit}%{?dist}
+%global build_timestamp %(date +"20260826")
+%global rel_build 4.git.%{build_timestamp}.%{shortcommit}%{?dist}
 
 %bcond_with         asan
 
