@@ -1,14 +1,10 @@
 Name:           aquamarine
-Version:        0.14.0
-Release:        %autorelease -b2
+Version:        0.15.0
+Release:        %autorelease
 Summary:        A very light linux rendering backend library
 License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/aquamarine
 Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
-
-Patch:          https://github.com/hyprwm/aquamarine/commit/fc39af0ccec9171aec8185eaea8afb71a46eff90.patch
-Patch:          https://github.com/hyprwm/aquamarine/commit/cf454160f2e9432263e2a2a531ce546a07033d01.patch
-Patch:          https://github.com/hyprwm/aquamarine/commit/5a9a6da9dd31efd3c4141abf034c74a5e00a0fd9.patch
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}
@@ -40,7 +36,7 @@ Requires:       %{name}%{?_isa} = %{version}-%{release}
 Development files for %{name}.
 
 %prep
-%autosetup -p1
+%autosetup
 
 %build
 %cmake -DCMAKE_BUILD_TYPE=Release
@@ -53,7 +49,7 @@ Development files for %{name}.
 %license LICENSE
 %doc README.md
 %{_libdir}/lib%{name}.so.%{version}
-%{_libdir}/lib%{name}.so.13
+%{_libdir}/lib%{name}.so.14
 
 %files devel
 %{_includedir}/%{name}/
