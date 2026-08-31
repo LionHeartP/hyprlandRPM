@@ -1,5 +1,5 @@
 Name:           mpvpaper
-Version:        1.8
+Version:        1.9
 Release:        %autorelease
 Summary:        A video wallpaper program
 
