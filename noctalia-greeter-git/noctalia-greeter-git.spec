@@ -1,5 +1,6 @@
 %global commit          6379fe287bb02b0bb538ad155fe18b1bf8615daf
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
+%global upstreamname    noctalia-greeter
 
 Name:   	noctalia-greeter-git
 Version:	1.3.1^1.%{shortcommit}
@@ -7,8 +8,8 @@ Release:	1%{?dist}
 Summary:	A minimal login greeter for greetd that matches the look and feel of Noctalia Shell.
 
 License:	MIT
-URL:		https://github.com/noctalia-dev/%{name}
-Source0:	%{url}/archive/%{commit}/%{name}-%{commit}.tar.gz
+URL:		https://github.com/noctalia-dev/%{upstreamname}
+Source0:	%{url}/archive/%{commit}/%{upstreamname}-%{commit}.tar.gz
 
 BuildRequires:  dbus
 BuildRequires:  gcc-c++
@@ -43,7 +44,7 @@ Conflicts:      noctalia-greeter
 %{summary}
 
 %prep
-%autosetup -n %{name}-%{commit}
+%autosetup -n %{upstreamname}-%{commit}
 
 %build
 %meson -Db_pie=true
@@ -53,10 +54,10 @@ Conflicts:      noctalia-greeter
 %meson_install
 # Delete the unneeded tmpfiles.d fallback configuration
 rm -f %{buildroot}%{_tmpfilesdir}/noctalia-greeter.conf
-install -d %{buildroot}%{_licensedir}/%{name}/third_party
+install -d %{buildroot}%{_licensedir}/%{upstreamname}/third_party
 find third_party -type f \( -name "LICENSE*" -o -name "COPYING*" -o -name "NOTICE*" \) | while read -r file; do
     # Create the destination subdirectory
-    dest_dir="%{buildroot}%{_licensedir}/%{name}/$(dirname "$file")"
+    dest_dir="%{buildroot}%{_licensedir}/%{upstreamname}/$(dirname "$file")"
     install -d "$dest_dir"
     # Copy the file to its specific subfolder
     install -p -m 0644 "$file" "$dest_dir/"
@@ -65,13 +66,13 @@ done
 %files
 %doc README.md
 %license LICENSE
-%{_licensedir}/%{name}/third_party/
-%{_bindir}/%{name}
-%{_bindir}/%{name}-apply-appearance
-%{_bindir}/%{name}-compositor
-%{_bindir}/%{name}-print-greetd-config
-%{_bindir}/%{name}-session
-%{_datadir}/%{name}/*
+%{_licensedir}/%{upstreamname}/third_party/
+%{_bindir}/%{upstreamname}
+%{_bindir}/%{upstreamname}-apply-appearance
+%{_bindir}/%{upstreamname}-compositor
+%{_bindir}/%{upstreamname}-print-greetd-config
+%{_bindir}/%{upstreamname}-session
+%{_datadir}/%{upstreamname}/*
 %{_datadir}/polkit-1/actions/org.noctalia.greeter.apply-appearance.policy
 
 %changelog
