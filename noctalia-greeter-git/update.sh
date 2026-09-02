@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 set -euxo pipefail
 
-SPEC_FILE="noctalia-greeter.spec"
+SPEC_FILE="noctalia-greeter-git.spec"
 REPO="noctalia-dev/noctalia-greeter"
 BRANCH="main"
 ec=0
@@ -39,6 +39,6 @@ sed -i "s/^Release:.*/Release:	1%{?dist}/" "$SPEC_FILE"
 sed -i "s/^%global commit.*/%global commit          $newCommit/" "$SPEC_FILE"
 
 if ! git diff --quiet "$SPEC_FILE"; then
-    git commit -am "up rev noctalia-greeter-${newTag:-$oldVersionBase}+${newCommit:0:7}"
+    git commit -am "up rev noctalia-greeter-git-${newTag:-$oldVersionBase}+${newCommit:0:7}"
     git push
 fi
