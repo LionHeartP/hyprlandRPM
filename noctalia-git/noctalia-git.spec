@@ -1,9 +1,9 @@
-%global commit          805ef71ad73c247d6efda592e0e77ffa92f6b778
+%global commit          a1a0e0ffc841af1f77901bc7ebc81c104ed8d56e
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 %global upstreamname    noctalia
 
 Name:   	noctalia-git
-Version:	5.0.0^427.%{shortcommit}
+Version:	5.0.0^428.%{shortcommit}
 Release:	1%{?dist}
 Summary:	A sleek, customizable desktop shell crafted for Wayland.
 
