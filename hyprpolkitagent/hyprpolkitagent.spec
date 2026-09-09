@@ -21,6 +21,7 @@ BuildRequires:  pkgconfig(hyprutils)
 BuildRequires:  pkgconfig(libdrm)
 BuildRequires:  pkgconfig(pixman-1)
 BuildRequires:  pkgconfig(sdbus-c++)
+BuildRequires:  pkgconfig(xkbcommon)
 
 %description
 A simple polkit authentication agent for Hyprland, written in QT/QML.
