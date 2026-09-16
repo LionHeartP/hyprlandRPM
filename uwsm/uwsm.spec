@@ -1,5 +1,5 @@
 Name:           uwsm
-Version:        0.26.4
+Version:        0.27.0
 Release:        %autorelease
 Summary:        Universal Wayland Session Manager
 
@@ -34,7 +34,7 @@ For compositors this is an opportunity to offload Systemd integration and
 session/XDG autostart management in Systemd-managed environments.
 
 %prep
-%autosetup -p1
+%autosetup
 
 %build
 %meson -Duuctl=enabled -Dfumon=enabled -Duwsm-app=enabled
