@@ -2,6 +2,7 @@
 %global commit0 c26b7705307f7a832b8be4150da38866945c7abc
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 #global bumpver 1
+%global slang_version 2026.18
 
 %define go_vendor_archive %{lua: print("vendor-"..(macros.bumpver and macros.shortcommit0 or macros.version)..".tar.gz")}
 
@@ -15,7 +16,7 @@
 %global goipath kitty
 
 Name:           kitty
-Version:        0.48.2%{?bumpver:^%{bumpver}.git%{shortcommit0}}
+Version:        0.49.0%{?bumpver:^%{bumpver}.git%{shortcommit0}}
 Release:        %autorelease
 Summary:        Cross-platform, fast, feature full, GPU based terminal emulator
 
@@ -70,6 +71,8 @@ Source6:        vendor-%{version}.tar.gz
 Source1:        https://raw.githubusercontent.com/kovidgoyal/kitty/46c0951751444e4f4994008f0d2dcb41e49389f4/kitty/data/%{name}.appdata.xml
 
 Source2:        https://github.com/ryanoasis/nerd-fonts/releases/latest/download/NerdFontsSymbolsOnly.tar.xz
+
+Source3:        https://github.com/shader-slang/slang/releases/download/v%{slang_version}/slang-%{slang_version}-linux-x86_64-glibc-2.27.tar.gz
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}
@@ -251,6 +254,9 @@ find -type f -name "*.py" -exec sed -e 's|/usr/bin/env python3|%{python3}|g'    
 mkdir src
 ln -s ../ src/kitty
 
+mkdir -p slang
+tar -xf %{SOURCE3} -C slang
+
 %if 0%{?epel}
 sed '1i \#define XKB_KEY_XF86Fn 0x100811d0' -i kitty/keys.c
 %endif
@@ -263,6 +269,7 @@ export GOPATH=$(pwd):%{gopath}
 
 %build
 %set_build_flags
+export PATH="$(pwd)/slang/bin:$PATH"
 %{python3} setup.py linux-package   \
     --libdir-name=%{_lib}           \
     --update-check-interval=0       \
@@ -308,6 +315,9 @@ rm %{buildroot}%{_datadir}/doc/%{name}/html/.buildinfo \
 
 %check
 %if %{with test}
+# Skip tests that require the slangc compiler, which is not packaged in Fedora
+sed -i '/def test_exe/a \        self.skipTest("slangc not available in Fedora")' kitty_tests/check_build.py
+sed -i '/def test_slang_build/a \        self.skipTest("slangc not available in Fedora")' kitty_tests/check_build.py
 sed '/def test_ssh_shell_integration/a \
 \        self.skipTest("Skipping a flaky test")' -i kitty_tests/ssh.py
 %if 0%{?epel}
