@@ -72,7 +72,8 @@ Source1:        https://raw.githubusercontent.com/kovidgoyal/kitty/46c0951751444
 
 Source2:        https://github.com/ryanoasis/nerd-fonts/releases/latest/download/NerdFontsSymbolsOnly.tar.xz
 
-Source3:        https://github.com/shader-slang/slang/releases/download/v%{slang_version}/slang-%{slang_version}-linux-x86_64-glibc-2.27.tar.gz
+Source10:        https://github.com/shader-slang/slang/releases/download/v%{slang_version}/slang-%{slang_version}-linux-x86_64-glibc-2.27.tar.gz
+Source11:        https://github.com/shader-slang/slang/releases/download/v%{slang_version}/slang-%{slang_version}-linux-aarch64-glibc-2.28.tar.gz
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}
@@ -255,7 +256,11 @@ mkdir src
 ln -s ../ src/kitty
 
 mkdir -p slang
-tar -xf %{SOURCE3} -C slang
+%ifarch aarch64
+tar -xf %{SOURCE11} -C slang
+%else
+tar -xf %{SOURCE10} -C slang
+%endif
 
 %if 0%{?epel}
 sed '1i \#define XKB_KEY_XF86Fn 0x100811d0' -i kitty/keys.c
