@@ -2,7 +2,6 @@
 %global commit0 c26b7705307f7a832b8be4150da38866945c7abc
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 #global bumpver 1
-%global slang_version 2026.18
 
 %define go_vendor_archive %{lua: print("vendor-"..(macros.bumpver and macros.shortcommit0 or macros.version)..".tar.gz")}
 
@@ -17,7 +16,7 @@
 
 Name:           kitty
 Version:        0.49.0%{?bumpver:^%{bumpver}.git%{shortcommit0}}
-Release:        %autorelease
+Release:        %autorelease -b2
 Summary:        Cross-platform, fast, feature full, GPU based terminal emulator
 
 # GPL-3.0-only: kitty
@@ -72,9 +71,6 @@ Source1:        https://raw.githubusercontent.com/kovidgoyal/kitty/46c0951751444
 
 Source2:        https://github.com/ryanoasis/nerd-fonts/releases/latest/download/NerdFontsSymbolsOnly.tar.xz
 
-Source10:        https://github.com/shader-slang/slang/releases/download/v%{slang_version}/slang-%{slang_version}-linux-x86_64-glibc-2.27.tar.gz
-Source11:        https://github.com/shader-slang/slang/releases/download/v%{slang_version}/slang-%{slang_version}-linux-aarch64-glibc-2.28.tar.gz
-
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}
 
@@ -92,6 +88,7 @@ BuildRequires:  libappstream-glib
 BuildRequires:  ncurses
 BuildRequires:  wayland-devel
 BuildRequires:  simde-static
+BuildRequires:  shader-slang-devel
 
 BuildRequires:  pkgconfig(dbus-1)
 BuildRequires:  pkgconfig(fontconfig)
@@ -109,6 +106,7 @@ BuildRequires:  pkgconfig(zlib)
 BuildRequires:  pkgconfig(libcrypto)
 BuildRequires:  pkgconfig(libxxhash)
 
+
 %if %{with test}
 # For tests:
 BuildRequires:  fish
@@ -124,6 +122,7 @@ BuildRequires:  zsh
 
 Requires:       python3%{?_isa}
 Requires:       hicolor-icon-theme
+Requires:       shader-slang
 
 Obsoletes:      %{name}-bash-integration < 0.28.1-3
 Obsoletes:      %{name}-fish-integration < 0.28.1-3
@@ -255,13 +254,6 @@ find -type f -name "*.py" -exec sed -e 's|/usr/bin/env python3|%{python3}|g'    
 mkdir src
 ln -s ../ src/kitty
 
-mkdir -p slang
-%ifarch aarch64
-tar -xf %{SOURCE11} -C slang
-%else
-tar -xf %{SOURCE10} -C slang
-%endif
-
 %if 0%{?epel}
 sed '1i \#define XKB_KEY_XF86Fn 0x100811d0' -i kitty/keys.c
 %endif
@@ -274,7 +266,6 @@ export GOPATH=$(pwd):%{gopath}
 
 %build
 %set_build_flags
-export PATH="$(pwd)/slang/bin:$PATH"
 %{python3} setup.py linux-package   \
     --libdir-name=%{_lib}           \
     --update-check-interval=0       \
@@ -320,9 +311,6 @@ rm %{buildroot}%{_datadir}/doc/%{name}/html/.buildinfo \
 
 %check
 %if %{with test}
-# Skip tests that require the slangc compiler, which is not packaged in Fedora
-sed -i '/def test_exe/a \        self.skipTest("slangc not available in Fedora")' kitty_tests/check_build.py
-sed -i '/def test_slang_build/a \        self.skipTest("slangc not available in Fedora")' kitty_tests/check_build.py
 sed '/def test_ssh_shell_integration/a \
 \        self.skipTest("Skipping a flaky test")' -i kitty_tests/ssh.py
 %if 0%{?epel}

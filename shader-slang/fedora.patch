@@ -1,0 +1,17 @@
+diff --git a/source/slang-glslang/CMakeLists.txt b/source/slang-glslang/CMakeLists.txt
+index 98a0475..37aee4e 100644
+--- a/source/slang-glslang/CMakeLists.txt	
++++ b/source/slang-glslang/CMakeLists.txt
+@@ -7,10 +7,11 @@ if(SLANG_ENABLE_SLANG_GLSLANG)
+         MODULE
+         USE_FEWER_WARNINGS
+         SKIP_ASAN
+-        LINK_WITH_PRIVATE glslang SPIRV SPIRV-Tools-opt SPIRV-Tools-link
++        LINK_WITH_PRIVATE glslang SPIRV SPIRV-Tools-opt SPIRV-Tools SPIRV-Tools-link
+         INCLUDE_DIRECTORIES_PRIVATE
+             ${slang_SOURCE_DIR}/include
+             ${CMAKE_CURRENT_BINARY_DIR}/../slang/slang-version-header
++            ${CMAKE_INSTALL_FULL_INCLUDEDIR}/glslang
+         INSTALL
+         EXPORT_SET_NAME SlangTargets
+     )
