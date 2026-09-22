@@ -73,6 +73,7 @@ done
 %{_bindir}/%{upstreamname}-compositor
 %{_bindir}/%{upstreamname}-print-greetd-config
 %{_bindir}/%{upstreamname}-session
+%{_bindir}/%{upstreamname}-xsession
 %{_datadir}/%{upstreamname}/*
 %{_datadir}/polkit-1/actions/org.noctalia.greeter.apply-appearance.policy
 
