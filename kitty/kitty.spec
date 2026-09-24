@@ -15,8 +15,8 @@
 %global goipath kitty
 
 Name:           kitty
-Version:        0.49.0%{?bumpver:^%{bumpver}.git%{shortcommit0}}
-Release:        %autorelease -b2
+Version:        0.49.1%{?bumpver:^%{bumpver}.git%{shortcommit0}}
+Release:        %autorelease
 Summary:        Cross-platform, fast, feature full, GPU based terminal emulator
 
 # GPL-3.0-only: kitty
@@ -122,7 +122,8 @@ BuildRequires:  zsh
 
 Requires:       python3%{?_isa}
 Requires:       hicolor-icon-theme
-Requires:       shader-slang
+
+Recommends:     shader-slang
 
 Obsoletes:      %{name}-bash-integration < 0.28.1-3
 Obsoletes:      %{name}-fish-integration < 0.28.1-3

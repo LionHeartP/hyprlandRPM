@@ -1,11 +1,11 @@
 diff --git a/source/slang-glslang/CMakeLists.txt b/source/slang-glslang/CMakeLists.txt
-index 98a0475..37aee4e 100644
+index ed1935d..14ad229 100644
 --- a/source/slang-glslang/CMakeLists.txt	
 +++ b/source/slang-glslang/CMakeLists.txt
-@@ -7,10 +7,11 @@ if(SLANG_ENABLE_SLANG_GLSLANG)
-         MODULE
-         USE_FEWER_WARNINGS
-         SKIP_ASAN
+@@ -16,10 +16,11 @@ if(SLANG_ENABLE_SLANG_GLSLANG)
+         # allocator is thread-local), and shared inputs such as the resource-limit
+         # table are read-only.
+         SKIP_SANITIZERS
 -        LINK_WITH_PRIVATE glslang SPIRV SPIRV-Tools-opt SPIRV-Tools-link
 +        LINK_WITH_PRIVATE glslang SPIRV SPIRV-Tools-opt SPIRV-Tools SPIRV-Tools-link
          INCLUDE_DIRECTORIES_PRIVATE
