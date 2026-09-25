@@ -3,7 +3,7 @@
 %global debug_package %{nil}
 
 Name:           shader-slang
-Version:        2026.18.2
+Version:        2026.18.3
 Release:        %autorelease
 Summary:        Shading language that makes it easier to build and maintain large shader codebases
 
