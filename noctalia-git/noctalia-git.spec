@@ -3,7 +3,7 @@
 %global upstreamname    noctalia
 
 Name:   	noctalia-git
-Version:	5.2.0^1.%{shortcommit}
+Version:	5.2.0^2.%{shortcommit}
 Release:	1%{?dist}
 Summary:	A sleek, customizable desktop shell crafted for Wayland.
 
@@ -56,6 +56,7 @@ Requires:       libwebp
 Recommends:     ddcutil
 Recommends:     gpu-screen-recorder
 Recommends:     power-profiles-daemon
+Recommends:     sound-theme-freedesktop
 
 Conflicts:      noctalia
 
