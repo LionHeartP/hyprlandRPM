@@ -1,6 +1,6 @@
 Name:           noctalia-hyprland-meta
 Version:        0.2
-Release:        7%{?dist}
+Release:        8%{?dist}
 Summary:        Meta-package to kickstart noctalia-shell on Hyprland
 BuildArch:      noarch
 
@@ -41,6 +41,9 @@ fi
 /etc/skel/.config/hypr/hyprland.lua
 
 %changelog
+* Wed Sep 30 2026 LionHeartP <LionHeartP@proton.me> - 0.2-8
+- Update lua config
+
 * Sun Jul 05 2026 LionHeartP <LionHeartP@proton.me> - 0.2-6
 - Allow git snapshots or stable for noctalia and hyprland 
 
