@@ -302,6 +302,31 @@ for i = 1, 10 do
     hl.bind(mainMod .. " + CTRL + " .. key, hl.dsp.window.move({ workspace = i, follow = false }))
 end
 
+-- Switch to workspaces 01-99
+hl.bind(mainMod .. " + G", hl.dsp.submap("ws_tens"), { description = "Workspace picker (01-99)" })
+hl.define_submap("ws_tens", function()
+    for tens = 0, 9 do
+        hl.bind(tostring(tens), hl.dsp.submap("ws_units_" .. tens))
+    end
+    local letters = "abcdefghijklmnopqrstuvwxyz"
+    for i = 1, #letters do
+        hl.bind(letters:sub(i, i), hl.dsp.submap("reset"))
+    end
+    hl.bind("escape", hl.dsp.submap("reset"))
+end)
+for tens = 0, 9 do
+    hl.define_submap("ws_units_" .. tens, "reset", function()
+        for units = 0, 9 do
+            local target = tens * 10 + units
+            if target > 0 then
+                hl.bind(tostring(units), hl.dsp.focus({ workspace = target }))
+            end
+        end
+        hl.bind("escape", hl.dsp.submap("reset"))
+        hl.bind("catchall", hl.dsp.submap("reset"))
+    end)
+end
+
 -- Fullscreen - Window takes up the entire working space, keeping the margins.
 hl.bind(mainMod .. " + CTRL + F", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
 -- Fullscreen - Window takes up the entire screen.
