@@ -3,7 +3,7 @@
 %global upstreamname    noctalia-greeter
 
 Name:   	noctalia-greeter-git
-Version:	1.6.0^10.%{shortcommit}
+Version:	1.6.0^11.%{shortcommit}
 Release:	1%{?dist}
 Summary:	A minimal login greeter for greetd that matches the look and feel of Noctalia Shell.
 
@@ -25,19 +25,27 @@ BuildRequires:  pkgconfig(fontconfig)
 BuildRequires:  pkgconfig(freetype2)
 BuildRequires:  pkgconfig(glesv2)
 BuildRequires:  pkgconfig(glib-2.0)
+BuildRequires:  pkgconfig(libinput)
 BuildRequires:  pkgconfig(librsvg-2.0)
 BuildRequires:  pkgconfig(libwebp)
 BuildRequires:  pkgconfig(libxml-2.0)
 BuildRequires:  pkgconfig(pango)
 BuildRequires:  pkgconfig(wayland-client)
 BuildRequires:  pkgconfig(wayland-protocols)
+BuildRequires:  pkgconfig(wayland-server)
 BuildRequires:  pkgconfig(xkbcommon)
 BuildRequires:  polkit
 BuildRequires:  wlroots-devel >= 0.20
 
+Requires:       bash
 Requires:       dbus
 Requires:       greetd
+Requires:       libinput
 Requires:       wlroots >= 0.20
+
+Recommends:     polkit
+
+Suggests:       (noctalia or noctalia-git)
 
 Conflicts:      noctalia-greeter
 
@@ -48,8 +56,11 @@ Conflicts:      noctalia-greeter
 %autosetup -n %{upstreamname}-%{commit}
 
 %build
-%meson -Db_pie=true
+%meson -Db_pie=true -Db_ndebug=true
 %meson_build
+
+%check
+%meson_test
 
 %install
 %meson_install
