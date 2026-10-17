@@ -1,8 +1,8 @@
-diff --git a/source/slang-glslang/CMakeLists.txt b/source/slang-glslang/CMakeLists.txt
-index ed1935d..14ad229 100644
---- a/source/slang-glslang/CMakeLists.txt	
+diff --git a/source/slang-glslang/CMakeLists (Copy).txt b/source/slang-glslang/CMakeLists.txt
+index df06201..0c4ba68 100644
+--- a/source/slang-glslang/CMakeLists (Copy).txt	
 +++ b/source/slang-glslang/CMakeLists.txt
-@@ -16,10 +16,11 @@ if(SLANG_ENABLE_SLANG_GLSLANG)
+@@ -26,10 +26,11 @@ if(SLANG_ENABLE_SLANG_GLSLANG)
          # allocator is thread-local), and shared inputs such as the resource-limit
          # table are read-only.
          SKIP_SANITIZERS
@@ -12,6 +12,6 @@ index ed1935d..14ad229 100644
              ${slang_SOURCE_DIR}/include
              ${CMAKE_CURRENT_BINARY_DIR}/../slang/slang-version-header
 +            ${CMAKE_INSTALL_FULL_INCLUDEDIR}/glslang
+             ${slang_glslang_extra_includes}
          INSTALL
          EXPORT_SET_NAME SlangTargets
-     )
