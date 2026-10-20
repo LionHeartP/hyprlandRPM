@@ -3,7 +3,7 @@
 %global upstreamname    noctalia-greeter
 
 Name:   	noctalia-greeter-git
-Version:	1.7.0^1.%{shortcommit}
+Version:	1.7.0^2.%{shortcommit}
 Release:	1%{?dist}
 Summary:	A minimal login greeter for greetd that matches the look and feel of Noctalia Shell.
 
@@ -17,7 +17,13 @@ BuildRequires:  greetd
 BuildRequires:  json-devel
 BuildRequires:  just
 BuildRequires:  meson
+%if 0%{?fedora} >= 46
+BuildRequires:  stb_image-devel
+BuildRequires:  stb_image_write-devel
+BuildRequires:  stb_image_resize2-devel
+%else
 BuildRequires:  stb-devel
+%endif
 BuildRequires:  tomlplusplus-devel
 BuildRequires:  pkgconfig(cairo)
 BuildRequires:  pkgconfig(egl)

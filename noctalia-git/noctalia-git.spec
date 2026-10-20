@@ -3,7 +3,7 @@
 %global upstreamname    noctalia
 
 Name:   	noctalia-git
-Version:	5.3.0^13.%{shortcommit}
+Version:	5.3.0^14.%{shortcommit}
 Release:	1%{?dist}
 Summary:	A sleek, customizable desktop shell crafted for Wayland.
 
@@ -19,7 +19,13 @@ BuildRequires:  json-devel
 BuildRequires:  md4c-devel
 BuildRequires:  pipewire-devel
 BuildRequires:  sdbus-cpp-devel
+%if 0%{?fedora} >= 46
+BuildRequires:  stb_image-devel
+BuildRequires:  stb_image_write-devel
+BuildRequires:  stb_image_resize2-devel
+%else
 BuildRequires:  stb-devel
+%endif
 BuildRequires:  tomlplusplus-devel
 BuildRequires:  wireplumber-devel
 BuildRequires:  pkgconfig(cairo)
