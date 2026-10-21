@@ -21,10 +21,7 @@ newCommitDate="$(env TZ=Etc/GMT+12 date -d "$(curl -s "https://api.github.com/re
                 jq -r '.[].commit.author.date')" +"%a %b %d %T %Y")"
 
 oldProtocolsCommit="$(sed -n 's/.*protocols_commit \(.*\)/\1/p' hyprland-git.spec)"
-newProtocolsCommit="$(curl -L \
-            -H "Accept: application/vnd.github+json" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            "https://api.github.com/repos/hyprwm/Hyprland/contents/subprojects/hyprland-protocols?ref=$newHyprlandCommit" | jq -r '.sha')"
+newProtocolsCommit="$(curl -s -H "Accept: application/vnd.github.VERSION.sha" "https://api.github.com/repos/hyprwm/hyprland-protocols/commits/main")"
 
 oldUdis86Commit="$(sed -n 's/.*udis86_commit \(.*\)/\1/p' hyprland-git.spec)"
 newUdis86Commit="$(curl -L \
