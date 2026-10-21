@@ -20,9 +20,6 @@ oldCommitDate="$(sed -n 's/.*commit_date \(.*\)/\1/p' hyprland-git.spec)"
 newCommitDate="$(env TZ=Etc/GMT+12 date -d "$(curl -s "https://api.github.com/repos/hyprwm/Hyprland/commits?per_page=1&ref=$newHyprlandCommit" | \
                 jq -r '.[].commit.author.date')" +"%a %b %d %T %Y")"
 
-oldProtocolsCommit="$(sed -n 's/.*protocols_commit \(.*\)/\1/p' hyprland-git.spec)"
-newProtocolsCommit="$(curl -s -H "Accept: application/vnd.github.VERSION.sha" "https://api.github.com/repos/hyprwm/hyprland-protocols/commits/main")"
-
 oldUdis86Commit="$(sed -n 's/.*udis86_commit \(.*\)/\1/p' hyprland-git.spec)"
 newUdis86Commit="$(curl -L \
             -H "Accept: application/vnd.github+json" \
@@ -32,7 +29,6 @@ newUdis86Commit="$(curl -L \
 sed -e "s/$oldHyprlandCommit/$newHyprlandCommit/" \
     -e "/%global commits_count/s/$oldCommitsCount/$newCommitsCount/" \
     -e "s/$oldCommitDate/$newCommitDate/" \
-    -e "s/$oldProtocolsCommit/$newProtocolsCommit/" \
     -e "s/$oldUdis86Commit/$newUdis86Commit/" \
     -i hyprland-git.spec
 
