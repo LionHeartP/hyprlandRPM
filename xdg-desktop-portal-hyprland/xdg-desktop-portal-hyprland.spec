@@ -18,12 +18,12 @@ BuildRequires:  systemd-rpm-macros
 BuildRequires:  pkgconfig(gbm)
 BuildRequires:  pkgconfig(hyprland-protocols)
 BuildRequires:  pkgconfig(hyprlang)
+BuildRequires:  pkgconfig(hyprtoolkit) >= 0.6.0
 BuildRequires:  pkgconfig(hyprutils)
 BuildRequires:  pkgconfig(hyprwayland-scanner)
 BuildRequires:  pkgconfig(libdrm)
 BuildRequires:  pkgconfig(libpipewire-0.3)
 BuildRequires:  pkgconfig(libsystemd)
-BuildRequires:  pkgconfig(Qt6Widgets)
 BuildRequires:  pkgconfig(systemd)
 BuildRequires:  pkgconfig(uuid)
 BuildRequires:  pkgconfig(wayland-client)
@@ -35,9 +35,6 @@ Requires:       dbus
 Requires:       grim
 Recommends:     hyprpicker
 Requires:       xdg-desktop-portal
-# required for hyprland-share-picker
-Requires:       slurp
-Requires:       qt6-qtwayland
 
 Enhances:       hyprland
 Supplements:    hyprland
