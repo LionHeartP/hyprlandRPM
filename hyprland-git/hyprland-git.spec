@@ -1,8 +1,8 @@
-%global hyprland_commit aabab87c387bd6b6b1e5b443308b25cafa16225e
+%global hyprland_commit 0aa6745f705f2c4b0a5004eb019ef76e5bbdb426
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
-%global bumpver 105
-%global commits_count 7977
-%global commit_date Sun Oct 25 03:41:09 2026
+%global bumpver 1
+%global commits_count 7978
+%global commit_date Τρι Οκτ 27 22:37:05 2026
 
 %global udis86_commit 5336633af70f3917760a6d441ff02d93477b0c86
 %global udis86_shortcommit %(c=%{udis86_commit}; echo ${c:0:7})
@@ -10,7 +10,7 @@
 %global libxkbcommon_version 1.11.0
 
 Name:           hyprland-git
-Version:        0.56.2%{?bumpver:^%{bumpver}.git%{hyprland_shortcommit}}
+Version:        0.57.0%{?bumpver:^%{bumpver}.git%{hyprland_shortcommit}}
 Release:        %autorelease
 Summary:        Dynamic tiling Wayland compositor that doesn't sacrifice on its looks
 
