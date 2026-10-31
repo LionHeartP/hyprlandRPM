@@ -1,6 +1,6 @@
 %global hyprland_commit 4b9ac40d71ceeeb027cfa06992c9212e3c3077b6
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
-%global bumpver 5
+%global bumpver 6
 %global commits_count 7988
 %global commit_date Thu Oct 29 23:44:24 2026
 
@@ -29,6 +29,8 @@ Source3:        https://github.com/canihavesomecoffee/udis86/archive/%{udis86_co
 Source0:        %{url}/releases/download/v%{version}/source-v%{version}.tar.gz
 %endif
 Source4:        macros.hyprland
+
+Patch:          https://github.com/hyprwm/Hyprland/pull/16708.patch
 
 %{lua:
 hyprdeps = {
@@ -190,6 +192,7 @@ Requires:       pkgconfig(xkbcommon)
 
 %prep
 %autosetup -n %{?bumpver:Hyprland-%{hyprland_commit}} %{!?bumpver:hyprland-source} -N
+%autopatch -p1
 # Fedora names it lua.pc . The correct version is ensured in the BuildRequires section
 sed -i 's/lua55/lua/g' CMakeLists.txt
 %if 0%{?bumpver}
