@@ -1,6 +1,6 @@
 Name:    	hyprshutdown
-Version: 	0.1.1
-Release: 	%autorelease -b3
+Version: 	0.1.2
+Release: 	%autorelease
 Summary: 	A graceful shutdown utility for Hyprland
 License: 	BSD-3-Clause license
 URL:     	https://github.com/hyprwm/hyprshutdown
