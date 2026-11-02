@@ -30,8 +30,6 @@ Source0:        %{url}/releases/download/v%{version}/source-v%{version}.tar.gz
 %endif
 Source4:        macros.hyprland
 
-Patch:          https://github.com/hyprwm/Hyprland/pull/16708.patch
-
 %{lua:
 hyprdeps = {
     "cmake",
@@ -192,7 +190,6 @@ Requires:       pkgconfig(xkbcommon)
 
 %prep
 %autosetup -n %{?bumpver:Hyprland-%{hyprland_commit}} %{!?bumpver:hyprland-source} -N
-%autopatch -p1
 # Fedora names it lua.pc . The correct version is ensured in the BuildRequires section
 sed -i 's/lua55/lua/g' CMakeLists.txt
 %if 0%{?bumpver}
