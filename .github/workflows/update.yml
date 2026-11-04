@@ -28,4 +28,4 @@ jobs:
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config --local user.name "github-actions[bot]"
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          find -name "update.sh" -execdir {} \;
+          find . -type f -name "update.sh" -execdir sh ./update.sh \;
