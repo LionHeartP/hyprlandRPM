@@ -116,7 +116,6 @@ Requires:       xorg-x11-server-Xwayland%{?_isa}
 Requires:       aquamarine%{?_isa} >= 0.9.2
 Requires:       hyprcursor%{?_isa} >= 0.1.13
 Requires:       hyprgraphics%{?_isa} >= 0.1.6
-Requires:       hyprlang%{?_isa} >= 0.6.3
 Requires:       hyprutils%{?_isa} >= 0.8.4
 
 %{lua:do
