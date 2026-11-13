@@ -1,9 +1,9 @@
-%global commit          12d96bd9d9c15a5488a9985336ca65d8eaddddf5
+%global commit          aed27e951e55fb1e9f28134730444322959f27eb
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 %global upstreamname    noctalia
 
 Name:   	noctalia-git
-Version:	5.5.0^3.%{shortcommit}
+Version:	5.5.0^4.%{shortcommit}
 Release:	1%{?dist}
 Summary:	A sleek, customizable desktop shell crafted for Wayland.
 
@@ -138,6 +138,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/dev.noctalia.Noctalia
 %license LICENSE
 %{_licensedir}/%{name}/third_party/
 %{_bindir}/noctalia
+%{_bindir}/noctalia-pam-helper
 %{_datadir}/noctalia/
 %{_datadir}/applications/dev.noctalia.Noctalia.desktop
 %{_datadir}/applications/dev.noctalia.Noctalia.Annotator.desktop
