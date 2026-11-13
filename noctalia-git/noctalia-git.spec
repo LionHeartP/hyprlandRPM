@@ -142,7 +142,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/dev.noctalia.Noctalia
 %{_datadir}/applications/dev.noctalia.Noctalia.desktop
 %{_datadir}/applications/dev.noctalia.Noctalia.Annotator.desktop
 %{_datadir}/icons/hicolor/scalable/apps/noctalia.svg
-%{_libexecdir}/noctalia-pam-helper
+%{_libexecdir}/noctalia/noctalia-pam-helper
 
 %files bash-completion
 %{_datadir}/bash-completion/completions/noctalia
