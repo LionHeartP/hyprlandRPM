@@ -1,4 +1,4 @@
-%global commit          aed27e951e55fb1e9f28134730444322959f27eb
+%global commit          42581ce5d3599be9cf54e971607c2d3ae43525fe
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 %global upstreamname    noctalia
 
@@ -138,11 +138,11 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/dev.noctalia.Noctalia
 %license LICENSE
 %{_licensedir}/%{name}/third_party/
 %{_bindir}/noctalia
-%{_bindir}/noctalia-pam-helper
 %{_datadir}/noctalia/
 %{_datadir}/applications/dev.noctalia.Noctalia.desktop
 %{_datadir}/applications/dev.noctalia.Noctalia.Annotator.desktop
 %{_datadir}/icons/hicolor/scalable/apps/noctalia.svg
+%{_libexecdir}/noctalia-pam-helper
 
 %files bash-completion
 %{_datadir}/bash-completion/completions/noctalia
