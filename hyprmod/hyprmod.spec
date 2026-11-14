@@ -1,5 +1,5 @@
 Name:           hyprmod
-Version:        0.5.0
+Version:        0.6.0
 Release:        %autorelease
 Summary:        Native GTK4/libadwaita settings app for Hyprland
 
@@ -8,11 +8,11 @@ URL:            https://github.com/BlueManCZ/hyprmod
 Source0:        %{url}/archive/refs/tags/v%{version}/%{name}-%{version}.tar.gz
 
 # Extra sources for bundled wheels
-Source1:        hyprland_config-0.9.19-py3-none-any.whl
-Source2:        hyprland_monitors-0.9.0-py3-none-any.whl
-Source3:        hyprland_schema-0.7.1-py3-none-any.whl
+Source1:        hyprland_config-0.9.21-py3-none-any.whl
+Source2:        hyprland_monitors-0.9.1-py3-none-any.whl
+Source3:        hyprland_schema-0.8.2-py3-none-any.whl
 Source4:        hyprland_socket-0.12.2-py3-none-any.whl
-Source5:        hyprland_state-0.4.7-py3-none-any.whl
+Source5:        hyprland_state-0.4.8-py3-none-any.whl
 
 BuildArch:      noarch
 
