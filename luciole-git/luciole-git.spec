@@ -1,11 +1,11 @@
-%global commit          b40c96336d97a15a3874bc93cb7b61627aeb3563
+%global commit          a5fd79c1da0a079c29b36cd9d27df6a7db4b8bfa
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 %global buildrevision   %(c=%{commit}; echo ${c:0:9})
 %global upstreamname    luciole
 %global upstreamurl     https://github.com/noctalia-dev/%{upstreamname}
 
 Name:           luciole-git
-Version:        0.1.0^1.%{shortcommit}
+Version:        0.1.0^2.%{shortcommit}
 Release:        1%{?dist}
 Summary:        Native Wayland file manager with fast previews, tabs and split view
 
@@ -54,6 +54,8 @@ BuildRequires:  pkgconfig(libarchive)
 BuildRequires:  pkgconfig(liblzma)
 BuildRequires:  pkgconfig(libpng)
 BuildRequires:  pkgconfig(librsvg-2.0)
+BuildRequires:  pkgconfig(libsoup-3.0)
+BuildRequires:  pkgconfig(libxml-2.0)
 
 Requires:       gvfs
 Requires:       shared-mime-info
