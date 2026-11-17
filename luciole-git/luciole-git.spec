@@ -74,6 +74,8 @@ Suggests:       xdg-terminal-exec
 Suggests:       xdg-desktop-portal
 
 Conflicts:      luciole
+# Terra
+Conflicts:      luciole-nightly
 
 %description
 Luciole, a native Wayland file manager using Noctalia rendering and controls (in development)
