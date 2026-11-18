@@ -15,7 +15,7 @@
 %global goipath kitty
 
 Name:           kitty
-Version:        0.50.0%{?bumpver:^%{bumpver}.git%{shortcommit0}}
+Version:        0.51.0%{?bumpver:^%{bumpver}.git%{shortcommit0}}
 Release:        %autorelease
 Summary:        Cross-platform, fast, feature full, GPU based terminal emulator
 
@@ -376,7 +376,7 @@ desktop-file-validate %{buildroot}/%{_datadir}/applications/*.desktop
 
 %files doc
 %license LICENSE
-%doc CONTRIBUTING.md CHANGELOG.rst INSTALL.md
+%doc docs/changelog.rst CONTRIBUTING.md INSTALL.md
 %{_docdir}/%{name}/html
 %dir %{_docdir}/%{name}
 
