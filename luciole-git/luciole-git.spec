@@ -1,11 +1,11 @@
-%global commit          83856751534bd13d06632f37b95892b20928deec
+%global commit          0b37f2cc760c241ce2cf78dbdc4744f18a5b66b7
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 %global buildrevision   %(c=%{commit}; echo ${c:0:9})
 %global upstreamname    luciole
 %global upstreamurl     https://github.com/noctalia-dev/%{upstreamname}
 
 Name:           luciole-git
-Version:	0.1.0^5.%{shortcommit}
+Version:	0.1.0^6.%{shortcommit}
 Release:	1%{?dist}
 Summary:        Native Wayland file manager with fast previews, tabs and split view
 
