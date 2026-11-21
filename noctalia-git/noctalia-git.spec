@@ -3,13 +3,14 @@
 %global upstreamname    noctalia
 
 Name:   	noctalia-git
-Version:	5.6.0^3.%{shortcommit}
+Version:	5.6.0^4.%{shortcommit}
 Release:	1%{?dist}
 Summary:	A sleek, customizable desktop shell crafted for Wayland.
 
 License:	MIT
 URL:		https://github.com/noctalia-dev/%{upstreamname}
 Source0:	%{url}/archive/%{commit}/%{upstreamname}-%{commit}.tar.gz
+Patch:          sdbus-cpp.patch
 
 BuildRequires:  meson
 BuildRequires:  gcc-c++
@@ -100,7 +101,7 @@ Supplements:    (%{name} = %{version}-%{release} and fish)
 Fish command-line completion support for %{upstreamname}.
 
 %prep
-%autosetup -n %{upstreamname}-%{commit}
+%autosetup -n %{upstreamname}-%{commit} -p1
 # Manually insert commit hash
 sed -i "s/'unknown'/'%{shortcommit}'/g" meson.build
 
