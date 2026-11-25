@@ -18,6 +18,7 @@ ExcludeArch:    %{ix86}
 BuildRequires:  gcc-c++
 BuildRequires:  meson >= 1.1
 BuildRequires:  ninja-build
+BuildRequires:  desktop-file-utils
 BuildRequires:  pkgconf-pkg-config
 BuildRequires:  wayland-devel
 BuildRequires:  wayland-protocols-devel >= 1.49
@@ -97,12 +98,17 @@ Luciole, a native Wayland file manager using Noctalia rendering and controls (in
 %install
 %meson_install
 
+%check
+desktop-file-validate %{buildroot}%{_datadir}/applications/dev.noctalia.luciole.desktop
+desktop-file-validate %{buildroot}%{_datadir}/applications/dev.noctalia.luciole-chooser.desktop
+
 %files
 %doc README.md PACKAGING.md
 %license %{_datadir}/licenses/luciole/LICENSE
 %license %{_datadir}/luciole/assets/fonts/tabler-icons-license.txt
 %{_bindir}/luciole
 %{_datadir}/applications/dev.noctalia.luciole.desktop
+%{_datadir}/applications/dev.noctalia.luciole-chooser.desktop
 %{_datadir}/bash-completion/completions/luciole
 %{_datadir}/dbus-1/services/dev.noctalia.luciole.FileManager1.service
 %{_datadir}/dbus-1/services/org.freedesktop.impl.portal.desktop.luciole.service
@@ -110,7 +116,6 @@ Luciole, a native Wayland file manager using Noctalia rendering and controls (in
 %{_datadir}/icons/hicolor/scalable/apps/dev.noctalia.luciole.svg
 %{_datadir}/luciole/assets/fonts/noctalia-tabler.ttf
 %{_datadir}/luciole/assets/fonts/tabler.json
-%{_datadir}/luciole/templates/colors.toml
 %{_datadir}/xdg-desktop-portal/portals/luciole.portal
 %{_datadir}/zsh/site-functions/_luciole
 
